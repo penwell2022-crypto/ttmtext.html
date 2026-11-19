@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ฝึกธาตุ 4 · ทบทวนและแบบฝึกหัด</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* VOICE: ห้องฝึกของผู้เรียนแพทย์แผนไทย อบอุ่น ชัด กระตุ้นให้ลงมือ
+   IDEA: โต๊ะคัดแยกเครื่องยา 4 ถาด ดิน น้ำ ลม ไฟ — หยิบการ์ดวางลงถาด
+   PICTURE: ถาดธาตุ 4 ใบกับการ์ดอาการที่ลากได้ อยู่บนสุดของหน้าฝึก
+   COLOUR+TYPE: ขาว + สีธาตุ ดิน #8B5A2B น้ำ #1F6FB2 ลม #2E8B57 ไฟ #C0392B · IBM Plex Sans Thai
+   LAYOUT: เมนูบน → ทบทวน (แผนผัง) / คัดแยก / ทายคำถาม / บัตรพลิก / รสยา / คะแนน */
+:root{color-scheme:light dark;--bg:light-dark(#fff,#121212);--ink:light-dark(#1b1a19,#ece9e4);--mut:light-dark(#66615b,#a9a39b);--line:light-dark(#e3dfd8,#2e2c29);--soft:light-dark(#f6f4f0,#1c1b19);--acc:light-dark(#1f6fb2,#6aa9e0);--ok:#2E8B57;--bad:#C0392B}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "IBM Plex Sans Thai",Tahoma,sans-serif;overflow-x:clip}
+.stripe{display:grid;grid-template-columns:repeat(4,1fr);height:8px}.stripe i:nth-child(1){background:#8B5A2B}.stripe i:nth-child(2){background:#1F6FB2}.stripe i:nth-child(3){background:#2E8B57}.stripe i:nth-child(4){background:#C0392B}
+header,main,nav .in{max-width:1180px;margin:auto;padding-inline:max(4vw,16px)}
+header{padding-top:18px;padding-bottom:6px}
+h1{font-size:clamp(26px,3.4vw,40px);line-height:1.1;margin:0 0 4px;text-wrap:balance}
+h2{font-size:24px;margin:20px 0 6px;line-height:1.2}h3{font-size:18px;margin:14px 0 6px}
+.sub,.note{color:var(--mut);font-size:14.5px;margin:0}
+nav{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+nav .in{display:flex;gap:2px;overflow-x:auto}
+nav a{flex:none;padding:12px 13px;color:var(--mut);text-decoration:none;font-weight:600;border-bottom:3px solid transparent;min-height:44px}
+nav a.on{color:var(--ink);border-color:var(--acc)}
+main{padding-top:14px;padding-bottom:60px}
+section{display:none}section.on{display:block}
+button{font:inherit;font-size:15.5px;padding:10px 16px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer;min-height:44px}
+button.pri{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600}
+button:focus-visible,a:focus-visible,select:focus-visible,.card:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+select{font:inherit;font-size:16px;padding:9px 10px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);min-height:44px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}
+.el{color:#fff;border-radius:8px;padding:2px 9px;font-weight:600;font-size:14px;display:inline-block}
+/* map */
+.lv{display:grid;grid-template-columns:96px minmax(0,1fr);gap:12px;margin:12px 0}.lv>b{color:var(--mut);font-size:14px;padding-top:8px}
+.tl{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.g{border:1px solid var(--line);border-radius:12px;background:var(--soft);padding:10px 12px;text-align:left;cursor:pointer;font:inherit;color:inherit}
+.g .bar{display:flex;height:10px;border-radius:5px;overflow:hidden;margin-bottom:6px}.g .bar i{flex:1}
+.g b{display:block}.g small{color:var(--mut)}
+.g .ex{font-size:13.5px;margin-top:6px;color:var(--ink)}
+.box{border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--soft);margin:12px 0}
+.ref{font-size:13.5px;color:var(--mut);white-space:pre-line}
+/* sort game */
+.pool{display:flex;flex-wrap:wrap;gap:8px;min-height:60px;padding:10px;border:2px dashed var(--line);border-radius:12px}
+.card{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:8px 12px;cursor:grab;font-size:15px;user-select:none;touch-action:none;box-shadow:0 1px 0 rgba(0,0,0,.06)}
+.card.sel{outline:3px solid var(--acc)}
+.card.ok{border-color:var(--ok);background:light-dark(#e6f4ea,#173222)}.card.bad{border-color:var(--bad);background:light-dark(#fbe4e1,#3a1b18)}
+.bins{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:12px}
+.bin{border-radius:14px;min-height:170px;padding:10px;display:flex;flex-direction:column;gap:6px;border:3px solid transparent}
+.bin h4{margin:0 0 4px;color:#fff;font-size:17px}
+.bin.hov{border-color:var(--ink)}
+.bins6{grid-template-columns:repeat(3,minmax(0,1fr))}
+/* quiz */
+.q{font-size:21px;font-weight:600;line-height:1.4;margin:8px 0 12px}
+.opts{display:grid;gap:8px}.opts button{text-align:left;font-size:16.5px}
+.opts button.ok{background:light-dark(#e6f4ea,#173222);border-color:var(--ok)}.opts button.bad{background:light-dark(#fbe4e1,#3a1b18);border-color:var(--bad)}
+.prog{height:8px;background:var(--soft);border-radius:4px;overflow:hidden;margin:6px 0}.prog i{display:block;height:100%;background:var(--acc)}
+/* flash */
+.fc{max-width:680px;margin:12px auto;border:1px solid var(--line);border-radius:16px;min-height:220px;perspective:900px;cursor:pointer}
+.fc .in{padding:26px;text-align:center}
+.fc .f{font-size:22px;font-weight:600}.fc .b{display:none;margin-top:14px;text-align:left}.fc.flip .b{display:block}
+.chips{display:flex;flex-wrap:wrap;gap:6px}.chip{border:1px solid var(--line);border-radius:999px;padding:3px 10px;font-size:14px;background:var(--bg)}
+/* taste */
+.tw{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.tz{border-radius:12px;padding:12px;color:#fff}.tz b{font-size:19px;display:block}.tz span{font-size:13px;opacity:.95}
+.big{font-size:clamp(30px,5vw,48px);font-weight:700;line-height:1}
+.stat{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.stat div{border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--soft)}
+.toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:8px;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:30}.toast.on{opacity:1}
+.ghost{position:fixed;pointer-events:none;z-index:40;opacity:.9}
+@media(prefers-reduced-motion:reduce){.toast{transition:none}}
+@media(max-width:700px){.bins{grid-template-columns:repeat(2,minmax(0,1fr))}.bins6{grid-template-columns:repeat(2,minmax(0,1fr))}.lv{grid-template-columns:minmax(0,1fr)}.lv>b{padding:0}.q{font-size:19px}}
+</style>
+</head>
+<body>
+<div class="stripe"><i></i><i></i><i></i><i></i></div>
+<header>
+  <h1>ฝึกธาตุ 4: ทบทวน · คัดแยก · ทายคำถาม</h1>
+  <p class="sub">ข้อมูลจากแพทยศาสตร์สงเคราะห์ เล่ม 1–2 (ฉันทศาสตร์ ธาตุวิภังค์ ธาตุวิวรณ์ โรคนิทาน ปฐมจินดา ตำรายากุมาร ตักศิลา คัมภีร์สรรพคุณ)</p>
+</header>
+<nav><div class="in">
+  <a href="#review" data-v="review">1 ทบทวน</a><a href="#sort" data-v="sort">2 คัดแยกลงถาดธาตุ</a><a href="#quiz" data-v="quiz">3 ทายคำถาม</a><a href="#cards" data-v="cards">4 บัตรพลิก</a><a href="#taste" data-v="taste">5 รสยา 9 รส</a><a href="#score" data-v="score">คะแนนของฉัน</a>
+</div></nav>
+<main>
+<section id="v-review">
+  <h2>แผนผังกลุ่มอาการ: ธาตุเดียว → สองธาตุ → สามธาตุ → สี่ธาตุ</h2>
+  <p class="note">แตะกลุ่มเพื่อดูโรคและอาการเด่น · แถบสีบอกว่ากลุ่มนั้นมีธาตุอะไรบ้าง</p>
+  <div id="map"></div>
+  <div class="box" id="gbox"><p class="note">เลือกกลุ่มด้านบน</p></div>
+  <h2>จำ 4 ธาตุด้วยภาพ</h2>
+  <div class="tw" id="elkey"></div>
+  <div class="box"><b>ลองทำตอนนี้</b><ol style="margin:6px 0">
+    <li>แตะกลุ่ม A01 ถึง A04 ทีละกลุ่ม แล้วพูดออกเสียงอาการเด่น 3 อย่างของแต่ละธาตุ</li>
+    <li>ชี้ตำแหน่งบนร่างกายตัวเองตามอาการ เช่น ลม = แตะท้อง (จุกเสียด) · ไฟ = แตะหน้าผาก (ร้อน)</li>
+    <li>ไปหน้า “คัดแยกลงถาดธาตุ” เพื่อเช็กว่าจำได้จริง</li></ol></div>
+</section>
+<section id="v-sort">
+  <div class="row"><select id="lvl"><option value="1">ระดับ 1: อาการ → ธาตุเดียว (ดิน น้ำ ลม ไฟ)</option><option value="2">ระดับ 2: ชื่อโรค → คู่ธาตุ</option></select><button id="newSort" class="pri">สุ่มการ์ดชุดใหม่</button><button id="chkSort">ตรวจคำตอบ</button></div>
+  <p class="note">ลากการ์ดลงถาด หรือแตะการ์ดหนึ่งครั้งแล้วแตะถาด · แตะการ์ดในถาดเพื่อหยิบกลับ</p>
+  <div class="pool" id="pool"></div>
+  <div class="bins" id="bins"></div>
+  <div class="box" id="sortRes" hidden></div>
+</section>
+<section id="v-quiz">
+  <div class="row"><select id="qt"><option value="mix">คละทุกแบบ</option><option value="dis">อาการชุดนี้คือโรคอะไร</option><option value="grp">โรคนี้อยู่กลุ่มธาตุใด</option><option value="tas">ตัวยานี้รสนำอะไร</option><option value="part">ตัวยานี้ใช้ส่วนใด</option><option value="txt">โรคนี้มาจากคัมภีร์ใด</option><option value="adj">กระสายนี้รสอะไร</option></select><button id="newQ" class="pri">เริ่มชุดใหม่ 10 ข้อ</button></div>
+  <div class="prog"><i id="qp" style="width:0"></i></div><p class="note" id="qn"></p>
+  <div class="q" id="qq"></div><div class="opts" id="qo"></div>
+  <div class="box" id="qx" hidden></div>
+  <div class="row"><button id="qNext" hidden>ข้อต่อไป</button></div>
+</section>
+<section id="v-cards">
+  <div class="row"><select id="deck"><option value="sym">โรค → อาการ</option><option value="herb">ตัวยา → รส ส่วนที่ใช้ สรรพคุณ</option><option value="adj">กระสายยา → รส ยาขนานที่ใช้</option></select><span class="note" id="dk"></span></div>
+  <div class="fc" id="fc" tabindex="0"><div class="in"><div class="f" id="ff"></div><div class="b" id="fb"></div></div></div>
+  <div class="row" style="justify-content:center"><button id="fFlip" class="pri">พลิก</button><button id="fKnow">จำได้</button><button id="fAgain">ยังไม่แน่ใจ</button></div>
+  <p class="note" style="text-align:center">ตอบออกเสียงก่อนพลิก · การ์ดที่ “ยังไม่แน่ใจ” จะกลับมาบ่อยขึ้น</p>
+</section>
+<section id="v-taste">
+  <h2>รสยา: รหัสรสในฐานข้อมูล</h2>
+  <div class="tw" id="tw"></div>
+  <h3>ตัวยาที่ใช้มากในตำรับ แยกตามรสนำ</h3>
+  <div id="tl"></div>
+  <div class="box"><b>หลักจำจากตำรา</b> (วรโยคสาร ล.2 น.45-46): รสเผ็ด ขม ฝาด ทำให้ลมกำเริบ · รสเผ็ด เปรี้ยว เค็ม ทำให้ดีกำเริบ · รสหวาน เปรี้ยว เค็ม ทำให้เสลดกำเริบ</div>
+</section>
+<section id="v-score">
+  <h2>ความก้าวหน้า</h2><div class="stat" id="st"></div>
+  <div class="row"><button id="reset">ล้างคะแนนทั้งหมด</button></div>
+  <p class="note">คะแนนเก็บไว้ในเบราว์เซอร์เครื่องนี้เท่านั้น</p>
+</section>
+</main>
+<div class="toast" id="toast"></div>
+<script src="data/zoods.js"></script>
+<script>
+{
+const Z=window.ZD,$=s=>document.querySelector(s),E=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const EC={'ไฟ':'#C0392B','ดิน':'#8B5A2B','น้ำ':'#1F6FB2','ลม':'#2E8B57','อากาศ':'#6C5B7B'};
+const GE={A01:['ไฟ'],A02:['ดิน'],A03:['น้ำ'],A04:['ลม'],A05:['อากาศ'],A11:['ไฟ','ลม'],A12:['ไฟ','ดิน'],A13:['ไฟ','น้ำ'],A14:['ลม','ดิน'],A15:['ลม','น้ำ'],A16:['ดิน','น้ำ'],A17:['ไฟ','ลม','น้ำ'],A18:['ไฟ','ลม','ดิน'],A19:['ไฟ','น้ำ','ดิน'],A20:['ลม','ดิน','น้ำ'],A21:['ไฟ','ลม','ดิน','น้ำ']};
+const TC={'ฝาด':'#8C6D4F','หวาน':'#B58C10','มัน':'#9C6B3A','เค็ม':'#3E74A8','เปรี้ยว':'#6E8A12','ขม':'#3F7A31','หอมเย็น':'#6A58A6','เมาเบื่อ':'#5E5E5E','เผ็ดร้อน':'#C0392B','จืด':'#7A7A7A','ขื่น / เฝื่อน':'#7A5C3E'};
+const st={get(k,d){try{const v=localStorage.getItem('fz-'+k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem('fz-'+k,JSON.stringify(v))}catch(e){}}};
+const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),1500)};
+const sh=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const pick=(a,n)=>sh(a).slice(0,n);
+const bar=g=>`<div class="bar">${(GE[g]||[]).map(e=>`<i style="background:${EC[e]}"></i>`).join('')}</div>`;
+const elTag=e=>`<span class="el" style="background:${EC[e]}">${e}</span>`;
+const scr=x=>(Z.T[x.tc]||{}).n||'';
+const short=r=>String(r||'').split('\n')[0].replace(/^TE\d+\s·\s/,'');
+/* ---------- review ---------- */
+function map(){const L=[['S1 ธาตุเดียว',['A01','A02','A03','A04','A05']],['S2 สองธาตุ',['A11','A12','A13','A14','A15','A16']],['S3 สามธาตุ',['A17','A18','A19','A20']],['S4 สี่ธาตุ',['A21']]];
+  $('#map').innerHTML=L.map(([n,cs])=>`<div class="lv"><b>${n}</b><div class="tl">${cs.filter(c=>Z.G[c]).map(c=>{const ex=Z.S.filter(s=>s.g===c).flatMap(s=>s.s).slice(0,3).join(' · ');return `<button class="g" data-g="${c}">${bar(c)}<b>${c} ${E(Z.G[c].d)}</b><small>${Z.G[c].k} ภาวะ</small><div class="ex">${E(ex)}</div></button>`}).join('')}</div></div>`).join('');
+  $('#map').querySelectorAll('.g').forEach(b=>b.onclick=()=>showG(b.dataset.g))}
+function showG(g){const L=Z.S.filter(s=>s.g===g);$('#gbox').innerHTML=`${bar(g)}<h3>${g} ${E(Z.G[g].d)} · ${L.length} ภาวะ</h3>`+L.map(s=>`<details><summary><b>${E(s.d)}</b> <span class="note">${E(short(s.ref))}</span></summary><div class="chips" style="margin:6px 0 10px">${s.s.map(x=>`<span class="chip">${E(x)}</span>`).join('')}</div></details>`).join('');$('#gbox').scrollIntoView({block:'nearest'})}
+function elkey(){const K=[['ดิน','แข็ง เป็นก้อน ซูบผอม รูปร่างเปลี่ยน','ผม ฟัน เล็บ กระดูก เนื้อ ตับ ม้าม'],['น้ำ','ไหล ซึม เปื่อย บวม กระหาย','เสมหะ หนอง เลือด เหงื่อ น้ำมูก ปัสสาวะ'],['ลม','เคลื่อน พัด: เจ็บ จุก เสียด เวียน สั่น','ลมพัดขึ้น พัดลง ในท้อง ในไส้ ทั่วกาย หายใจ'],['ไฟ','ร้อน แสบ ไข้ คลั่ง หรือไฟหย่อนจนตัวเย็น','ไฟอุ่นกาย ไฟระส่ำระสาย ไฟย่อยอาหาร ไฟทรุดโทรม']];
+  $('#elkey').innerHTML=K.map(([e,a,b])=>`<div class="tz" style="background:${EC[e]}"><b>${e}</b><span>${a}</span><br><span style="opacity:.85">${b}</span></div>`).join('')}
+/* ---------- sort ---------- */
+let sel=null;
+function newSort(){const lv=$('#lvl').value;$('#sortRes').hidden=true;let items,bins;
+  if(lv==='1'){bins=['ดิน','น้ำ','ลม','ไฟ'].map(e=>({k:e,n:e,c:EC[e]}));const by={A02:'ดิน',A03:'น้ำ',A04:'ลม',A01:'ไฟ'};
+    const cnt={};Z.S.filter(s=>by[s.g]).forEach(s=>s.s.forEach(x=>{cnt[x]=(cnt[x]||new Set()).add(by[s.g])}));
+    items=[];Object.entries(by).forEach(([g,e])=>{const pool=[...new Set(Z.S.filter(s=>s.g===g).flatMap(s=>s.s.map(x=>({t:x,a:e,r:short(s.ref)+' · '+s.d}))).filter(o=>cnt[o.t].size===1&&o.t.length<=26).map(o=>JSON.stringify(o)))].map(x=>JSON.parse(x));items.push(...pick(pool,3))})}
+  else{const cs=['A11','A12','A13','A14','A15','A16'];bins=cs.map(c=>({k:c,n:GE[c].join(' + '),c:`linear-gradient(90deg,${GE[c].map(e=>EC[e]).join(',')})`}));
+    items=cs.flatMap(c=>pick(Z.S.filter(s=>s.g===c),2).map(s=>({t:s.d.length>46?s.d.slice(0,45)+'…':s.d,a:c,r:short(s.ref)+' · อาการ: '+s.s.slice(0,4).join(' ')})))}
+  items=sh(items);$('#bins').className='bins'+(lv==='2'?' bins6':'');
+  $('#pool').innerHTML=items.map((o,i)=>`<div class="card" data-a="${E(o.a)}" data-r="${E(o.r)}" id="c${i}">${E(o.t)}</div>`).join('');
+  $('#bins').innerHTML=bins.map(b=>`<div class="bin" data-k="${E(b.k)}" style="background:${b.c.startsWith('linear')?b.c:b.c}"><h4>${E(b.n)}</h4></div>`).join('');
+  $('#bins').querySelectorAll('.bin').forEach(b=>b.style.background=b.style.background+'');
+  bindCards()}
+function place(card,bin){(bin||$('#pool')).appendChild(card);card.classList.remove('sel','ok','bad');sel=null}
+function bindCards(){
+  document.querySelectorAll('#v-sort .card').forEach(c=>{
+    c.onpointerdown=e=>{const sx=e.clientX,sy=e.clientY;let g=null,moved=false;c.setPointerCapture(e.pointerId);
+      c.onpointermove=ev=>{if(!moved&&Math.hypot(ev.clientX-sx,ev.clientY-sy)>6){moved=true;g=c.cloneNode(true);g.classList.add('ghost');g.style.width=c.offsetWidth+'px';document.body.appendChild(g)}
+        if(g){g.style.left=ev.clientX-20+'px';g.style.top=ev.clientY-20+'px';document.querySelectorAll('.bin').forEach(b=>b.classList.remove('hov'));const t=document.elementFromPoint(ev.clientX,ev.clientY);const b=t&&t.closest('.bin');if(b)b.classList.add('hov')}};
+      c.onpointerup=ev=>{c.onpointermove=null;c.onpointerup=null;document.querySelectorAll('.bin').forEach(b=>b.classList.remove('hov'));
+        if(g){g.remove();const t=document.elementFromPoint(ev.clientX,ev.clientY);const b=t&&(t.closest('.bin')||t.closest('.pool'));if(b)place(c,b.classList.contains('pool')?null:b)}
+        else{if(c.parentElement.classList.contains('bin')){place(c,null);return}document.querySelectorAll('#v-sort .card').forEach(x=>x.classList.remove('sel'));sel=c;c.classList.add('sel')}}}});
+  document.querySelectorAll('.bin').forEach(b=>b.onclick=e=>{if(sel&&!e.target.closest('.card'))place(sel,b)})}
+function chkSort(){let ok=0,n=0;const wrong=[];document.querySelectorAll('#v-sort .card').forEach(c=>{const b=c.parentElement.closest('.bin');if(!b){c.classList.remove('ok','bad');return}n++;const good=b.dataset.k===c.dataset.a;c.classList.toggle('ok',good);c.classList.toggle('bad',!good);if(good)ok++;else wrong.push(c)});
+  const tot=document.querySelectorAll('#v-sort .card').length;const r=$('#sortRes');r.hidden=false;
+  r.innerHTML=`<b>ถูก ${ok} จาก ${tot} ใบ</b>${n<tot?` <span class="note">(ยังไม่ได้วาง ${tot-n} ใบ)</span>`:''}`+(wrong.length?`<p class="note">ใบที่ผิด: คำตอบที่ถูกและที่มา</p>`+wrong.map(c=>`<div>• ${E(c.textContent)} → <b>${E($('#lvl').value==='1'?c.dataset.a:GE[c.dataset.a].join(' + '))}</b> <span class="ref">(${E(c.dataset.r)})</span></div>`).join(''):'<p>ยอดเยี่ยม จัดถูกทุกใบ</p>');
+  if(n===tot){const s=st.get('sort',{p:0,ok:0,n:0});s.p++;s.ok+=ok;s.n+=tot;st.set('sort',s)}}
+/* ---------- quiz ---------- */
+const HT=Z.H.filter(h=>h.t.length&&!h.s),HP=Z.H.filter(h=>h.p),TAS=Object.keys(TC).filter(t=>t!=='ขื่น / เฝื่อน');
+function genQ(t){
+  if(t==='mix')t=pick(['dis','grp','tas','part','txt','adj','dis','grp'],1)[0];
+  if(t==='dis'){const x=pick(Z.S.filter(s=>s.s.length>=3),1)[0];const o=pick(Z.S.filter(s=>s.d!==x.d),3).map(s=>s.d);return{q:'อาการชุดนี้: “'+pick(x.s,Math.min(4,x.s.length)).join(' · ')+'” คือภาวะ/โรคใด',a:x.d,o:sh([x.d,...o]),x:short(x.ref)}}
+  if(t==='grp'){const x=pick(Z.S,1)[0];const a=Z.G[x.g].d;const o=pick(Object.entries(Z.G).filter(([k])=>k!==x.g).map(([k,v])=>v.d),3);return{q:'“'+x.d+'” อยู่ในกลุ่มธาตุใด',a,o:sh([a,...o]),x:short(x.ref)+' · อาการ: '+x.s.slice(0,5).join(' ')}}
+  if(t==='tas'){const x=pick(HT,1)[0];const a=x.t[0];const o=pick(TAS.filter(v=>v!==a),3);return{q:'ตัวยา “'+x.n+'” มีรสนำอะไร',a,o:sh([a,...o]),x:'รสทั้งหมด: '+x.t.join(' → ')+(x.q.length?' · สรรพคุณ: '+x.q.join(' '):'')}}
+  if(t==='part'){const x=pick(HP,1)[0];const parts=[...new Set(HP.map(h=>h.p))];const o=pick(parts.filter(v=>v!==x.p),3);return{q:'“'+x.n+'” ใช้ส่วนใดของต้นเป็นหลัก',a:x.p,o:sh([x.p,...o]),x:x.q.length?'สรรพคุณ: '+x.q.join(' '):''}}
+  if(t==='txt'){const x=pick(Z.S.filter(s=>scr(s)),1)[0];const a=scr(x);const o=pick([...new Set(Z.S.map(scr).filter(v=>v&&v!==a))],3);return{q:'“'+x.d+'” กล่าวไว้ในคัมภีร์ใด',a,o:sh([a,...o]),x:short(x.ref)}}
+  const J=Z.J.filter(j=>j.t.length);const x=pick(J,1)[0];const a=x.t.join(' ');const o=pick([...new Set(J.map(j=>j.t.join(' ')).filter(v=>v!==a))],3);return{q:'กระสายยา “'+x.n+'” มีรสอะไร',a,o:sh([a,...o]),x:'ใช้กับ: '+x.f.slice(0,5).join(' · ')}}
+let QS=[],qi=0,qok=0;
+function newQ(){QS=Array.from({length:10},()=>genQ($('#qt').value));qi=0;qok=0;showQ()}
+function showQ(){if(qi>=QS.length){$('#qq').textContent=`จบชุดแล้ว ได้ ${qok} / ${QS.length} คะแนน`;$('#qo').innerHTML='';$('#qx').hidden=true;$('#qNext').hidden=true;$('#qp').style.width='100%';
+    const s=st.get('quiz',{p:0,ok:0,n:0});s.p++;s.ok+=qok;s.n+=QS.length;st.set('quiz',s);return}
+  const Q=QS[qi];$('#qn').textContent=`ข้อ ${qi+1} / ${QS.length} · ถูก ${qok}`;$('#qp').style.width=(qi/QS.length*100)+'%';$('#qq').textContent=Q.q;$('#qx').hidden=true;$('#qNext').hidden=true;
+  $('#qo').innerHTML=Q.o.map((o,i)=>`<button data-i="${i}">${'กขคง'[i]}. ${E(o)}</button>`).join('');
+  $('#qo').querySelectorAll('button').forEach(b=>b.onclick=()=>{if(!$('#qNext').hidden)return;const v=Q.o[+b.dataset.i],good=v===Q.a;if(good)qok++;
+    $('#qo').querySelectorAll('button').forEach(x=>{const vv=Q.o[+x.dataset.i];if(vv===Q.a)x.classList.add('ok');else if(x===b)x.classList.add('bad')});
+    $('#qx').hidden=false;$('#qx').innerHTML=`<b>${good?'ถูกต้อง':'ยังไม่ถูก'}</b> · คำตอบ: ${E(Q.a)}${Q.x?`<div class="ref">${E(Q.x)}</div>`:''}`;$('#qNext').hidden=false;$('#qNext').focus()})}
+$('#qNext').onclick=()=>{qi++;showQ()};$('#newQ').onclick=newQ;$('#qt').onchange=newQ;
+/* ---------- flash ---------- */
+let cur=null;
+function deckItems(){const d=$('#deck').value;
+  if(d==='sym')return Z.S.map((s,i)=>({id:'s'+i,f:s.d,b:`${bar(s.g)}<div class="chips">${s.s.map(x=>`<span class="chip">${E(x)}</span>`).join('')}</div><p class="ref">${E(Z.G[s.g].d)} · ${E(short(s.ref))}</p>`}));
+  if(d==='herb')return Z.H.filter(h=>h.t.length||h.q.length).map(h=>({id:h.c,f:h.n,b:`<p>${h.t.map(t=>`<span class="el" style="background:${TC[t]||'#777'}">${E(t)}</span>`).join(' ')} ${h.s?'<span class="note">(รสเติมจากตำราทั่วไป)</span>':''}</p><p><b>ส่วนที่ใช้:</b> ${E(h.p||'-')} · <b>อยู่ใน</b> ${h.k} ตำรับ</p>${h.q.length?`<p><b>สรรพคุณ:</b> ${E(h.q.join(' · '))}</p>`:''}`}));
+  return Z.J.map(j=>({id:j.c,f:j.n,b:`<p>${j.t.map(t=>`<span class="chip">${E(t)}</span>`).join(' ')||'ไม่มีรสเด่น'} · กลุ่มธาตุ ${E(j.g)}</p><p class="ref">ใช้กับ: ${E(j.f.join(' · '))}</p>`}))}
+function nextCard(){const L=deckItems(),sc=st.get('fc',{});const w=L.map(x=>{const s=sc[x.id]||{};return Math.max(.3,1+2*(s.a||0)-.6*(s.k||0))});let t=Math.random()*w.reduce((a,b)=>a+b,0),j=0;while(t>w[j]&&j<w.length-1){t-=w[j];j++}
+  cur=L[j];$('#fc').classList.remove('flip');$('#ff').textContent=cur.f;$('#fb').innerHTML=cur.b;const v=Object.values(sc);$('#dk').textContent=`${L.length} ใบ · จำได้ ${v.reduce((a,x)=>a+(x.k||0),0)} ครั้ง`}
+function mark(k){const sc=st.get('fc',{});const o=sc[cur.id]||{};o[k]=(o[k]||0)+1;sc[cur.id]=o;st.set('fc',sc);nextCard()}
+$('#fc').onclick=$('#fFlip').onclick=()=>$('#fc').classList.toggle('flip');$('#fc').onkeydown=e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();$('#fc').classList.toggle('flip')}};
+$('#fKnow').onclick=()=>mark('k');$('#fAgain').onclick=()=>mark('a');$('#deck').onchange=nextCard;
+/* ---------- taste ---------- */
+function taste(){const cnt={};Z.H.forEach(h=>{if(h.t[0])cnt[h.t[0]]=(cnt[h.t[0]]||0)+1});
+  $('#tw').innerHTML=Object.keys(TC).map(t=>`<div class="tz" style="background:${TC[t]}"><b>${E(t)}</b><span>${cnt[t]||0} ตัวยามีรสนำนี้</span></div>`).join('');
+  const by={};Z.H.filter(h=>h.t[0]).sort((a,b)=>b.k-a.k).forEach(h=>{(by[h.t[0]]=by[h.t[0]]||[]).length<8&&by[h.t[0]].push(h)});
+  $('#tl').innerHTML=Object.entries(by).sort((a,b)=>(cnt[b[0]]||0)-(cnt[a[0]]||0)).map(([t,L])=>`<div class="row"><span class="el" style="background:${TC[t]||'#777'};min-width:84px;text-align:center">${E(t)}</span><div class="chips">${L.map(h=>`<span class="chip">${E(h.n)} <span class="note">${h.k}</span></span>`).join('')}</div></div>`).join('')}
+/* ---------- score ---------- */
+function score(){const s=st.get('sort',{p:0,ok:0,n:0}),q=st.get('quiz',{p:0,ok:0,n:0}),f=Object.values(st.get('fc',{}));const pc=(a,b)=>b?Math.round(a*100/b)+'%':'-';
+  $('#st').innerHTML=`<div><span class="note">คัดแยกลงถาด</span><div class="big">${pc(s.ok,s.n)}</div><span class="note">${s.p} รอบ · ${s.ok}/${s.n} ใบ</span></div><div><span class="note">ทายคำถาม</span><div class="big">${pc(q.ok,q.n)}</div><span class="note">${q.p} ชุด · ${q.ok}/${q.n} ข้อ</span></div><div><span class="note">บัตรพลิก</span><div class="big">${f.reduce((a,x)=>a+(x.k||0),0)}</div><span class="note">ครั้งที่จำได้ · ยังไม่แน่ใจ ${f.reduce((a,x)=>a+(x.a||0),0)}</span></div>`}
+$('#reset').onclick=()=>{['sort','quiz','fc'].forEach(k=>st.set(k,k==='fc'?{}:{p:0,ok:0,n:0}));score();toast('ล้างคะแนนแล้ว')};
+$('#newSort').onclick=newSort;$('#lvl').onchange=newSort;$('#chkSort').onclick=chkSort;
+function route(){const v=(location.hash||'#review').slice(1),ok=['review','sort','quiz','cards','taste','score'].includes(v)?v:'review';
+  document.querySelectorAll('section').forEach(s=>s.classList.toggle('on',s.id==='v-'+ok));document.querySelectorAll('nav a').forEach(a=>a.classList.toggle('on',a.dataset.v===ok));if(ok==='score')score()}
+addEventListener('hashchange',route);
+map();elkey();showG('A01');newSort();newQ();nextCard();taste();route();
+}
+</script>
+</body>
+</html>
