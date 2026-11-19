@@ -78,10 +78,10 @@ select{font:inherit;font-size:16px;padding:9px 10px;border:1px solid var(--line)
 <div class="stripe"><i></i><i></i><i></i><i></i></div>
 <header>
   <h1>ฝึกธาตุ 4: ทบทวน · คัดแยก · ทายคำถาม</h1>
-  <p class="sub">ข้อมูลจากแพทยศาสตร์สงเคราะห์ เล่ม 1–2 (ฉันทศาสตร์ ธาตุวิภังค์ ธาตุวิวรณ์ โรคนิทาน ปฐมจินดา ตำรายากุมาร ตักศิลา คัมภีร์สรรพคุณ)</p>
+  <p class="sub">ข้อมูลจากแพทยศาสตร์สงเคราะห์ เล่ม 1–2 ครบ 15 คัมภีร์ (ฉันทศาสตร์ ปฐมจินดา ธาตุวิภังค์ สรรพคุณ สมุฏฐานวินิจฉัย วรโยคสาร มหาโชตรัต ชวดาร โรคนิทาน ธาตุวิวรณ์ ธาตุบรรจบ มุจฉาปักขันทิกา ตักศิลา กษัย ฯลฯ)</p>
 </header>
 <nav><div class="in">
-  <a href="#review" data-v="review">1 ทบทวน</a><a href="#sort" data-v="sort">2 คัดแยกลงถาดธาตุ</a><a href="#quiz" data-v="quiz">3 ทายคำถาม</a><a href="#cards" data-v="cards">4 บัตรพลิก</a><a href="#taste" data-v="taste">5 รสยา 9 รส</a><a href="#score" data-v="score">คะแนนของฉัน</a>
+  <a href="#review" data-v="review">1 ทบทวน</a><a href="#sort" data-v="sort">2 คัดแยกลงถาดธาตุ</a><a href="#quiz" data-v="quiz">3 ทายคำถาม</a><a href="#cards" data-v="cards">4 บัตรพลิก</a><a href="#taste" data-v="taste">5 รสยา 9 รส</a><a href="#library" data-v="library">6 คลังคัมภีร์ทั้งหมด</a><a href="#score" data-v="score">คะแนนของฉัน</a>
 </div></nav>
 <main>
 <section id="v-review">
@@ -97,14 +97,14 @@ select{font:inherit;font-size:16px;padding:9px 10px;border:1px solid var(--line)
     <li>ไปหน้า “คัดแยกลงถาดธาตุ” เพื่อเช็กว่าจำได้จริง</li></ol></div>
 </section>
 <section id="v-sort">
-  <div class="row"><select id="lvl"><option value="1">ระดับ 1: อาการ → ธาตุเดียว (ดิน น้ำ ลม ไฟ)</option><option value="2">ระดับ 2: ชื่อโรค → คู่ธาตุ</option></select><button id="newSort" class="pri">สุ่มการ์ดชุดใหม่</button><button id="chkSort">ตรวจคำตอบ</button></div>
+  <div class="row"><select id="lvl"><option value="1">ระดับ 1: อาการ → ธาตุเดียว (ดิน น้ำ ลม ไฟ)</option><option value="2">ระดับ 2: ชื่อโรค → คู่ธาตุ</option><option value="3">ระดับ 3: ข้อความ → คัมภีร์</option></select><button id="newSort" class="pri">สุ่มการ์ดชุดใหม่</button><button id="chkSort">ตรวจคำตอบ</button></div>
   <p class="note">ลากการ์ดลงถาด หรือแตะการ์ดหนึ่งครั้งแล้วแตะถาด · แตะการ์ดในถาดเพื่อหยิบกลับ</p>
   <div class="pool" id="pool"></div>
   <div class="bins" id="bins"></div>
   <div class="box" id="sortRes" hidden></div>
 </section>
 <section id="v-quiz">
-  <div class="row"><select id="qt"><option value="mix">คละทุกแบบ</option><option value="dis">อาการชุดนี้คือโรคอะไร</option><option value="grp">โรคนี้อยู่กลุ่มธาตุใด</option><option value="tas">ตัวยานี้รสนำอะไร</option><option value="part">ตัวยานี้ใช้ส่วนใด</option><option value="txt">โรคนี้มาจากคัมภีร์ใด</option><option value="adj">กระสายนี้รสอะไร</option></select><button id="newQ" class="pri">เริ่มชุดใหม่ 10 ข้อ</button></div>
+  <div class="row"><select id="qt"><option value="mix">คละทุกแบบ</option><option value="dis">อาการชุดนี้คือโรคอะไร</option><option value="grp">โรคนี้อยู่กลุ่มธาตุใด</option><option value="tas">ตัวยานี้รสนำอะไร</option><option value="part">ตัวยานี้ใช้ส่วนใด</option><option value="txt">โรคนี้มาจากคัมภีร์ใด</option><option value="adj">กระสายนี้รสอะไร</option><option value="sec">หัวข้อนี้อยู่ในคัมภีร์ใด</option><option value="key">ข้อความนี้มาจากคัมภีร์ใด</option></select><button id="newQ" class="pri">เริ่มชุดใหม่ 10 ข้อ</button></div>
   <div class="prog"><i id="qp" style="width:0"></i></div><p class="note" id="qn"></p>
   <div class="q" id="qq"></div><div class="opts" id="qo"></div>
   <div class="box" id="qx" hidden></div>
@@ -119,9 +119,18 @@ select{font:inherit;font-size:16px;padding:9px 10px;border:1px solid var(--line)
 <section id="v-taste">
   <h2>รสยา: รหัสรสในฐานข้อมูล</h2>
   <div class="tw" id="tw"></div>
+  <h3>รส 9 กับหน้าที่ (ฉันทศาสตร์ ล.1 น.17)</h3>
+  <div class="tw" id="t9"></div>
   <h3>ตัวยาที่ใช้มากในตำรับ แยกตามรสนำ</h3>
   <div id="tl"></div>
   <div class="box"><b>หลักจำจากตำรา</b> (วรโยคสาร ล.2 น.45-46): รสเผ็ด ขม ฝาด ทำให้ลมกำเริบ · รสเผ็ด เปรี้ยว เค็ม ทำให้ดีกำเริบ · รสหวาน เปรี้ยว เค็ม ทำให้เสลดกำเริบ</div>
+</section>
+<section id="v-library">
+  <h2>คลังคัมภีร์ในแพทยศาสตร์สงเคราะห์ เล่ม 1–2</h2>
+  <p class="note">แตะคัมภีร์เพื่อเปิดหัวข้อ สาระสำคัญ และตำรับยา · สาระสำคัญอ่านจากหน้าหนังสือ (มีเลขหน้า) · ตำรับยาถอดด้วยโปรแกรมอ่านตัวอักษร ควรตรวจกับหน้าหนังสือก่อนใช้จริง</p>
+  <div class="row" id="volf"><button data-v="0" class="pri">ทั้งหมด</button><button data-v="1">เล่ม 1</button><button data-v="2">เล่ม 2</button></div>
+  <div class="tl" id="libg"></div>
+  <div class="box" id="libd"><p class="note">เลือกคัมภีร์ด้านบน</p></div>
 </section>
 <section id="v-score">
   <h2>ความก้าวหน้า</h2><div class="stat" id="st"></div>
@@ -131,6 +140,7 @@ select{font:inherit;font-size:16px;padding:9px 10px;border:1px solid var(--line)
 </main>
 <div class="toast" id="toast"></div>
 <script src="data/zoods.js"></script>
+<script src="data/library.js"></script>
 <script>
 {
 const Z=window.ZD,$=s=>document.querySelector(s),E=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -158,6 +168,8 @@ function newSort(){const lv=$('#lvl').value;$('#sortRes').hidden=true;let items,
   if(lv==='1'){bins=['ดิน','น้ำ','ลม','ไฟ'].map(e=>({k:e,n:e,c:EC[e]}));const by={A02:'ดิน',A03:'น้ำ',A04:'ลม',A01:'ไฟ'};
     const cnt={};Z.S.filter(s=>by[s.g]).forEach(s=>s.s.forEach(x=>{cnt[x]=(cnt[x]||new Set()).add(by[s.g])}));
     items=[];Object.entries(by).forEach(([g,e])=>{const pool=[...new Set(Z.S.filter(s=>s.g===g).flatMap(s=>s.s.map(x=>({t:x,a:e,r:short(s.ref)+' · '+s.d}))).filter(o=>cnt[o.t].size===1&&o.t.length<=26).map(o=>JSON.stringify(o)))].map(x=>JSON.parse(x));items.push(...pick(pool,3))})}
+  else if(lv==='3'){const P=sh(LIB.filter(x=>x.k.length>=2)).slice(0,4);bins=P.map((x,i)=>({k:x.c,n:x.n.replace('พระคัมภีร์',''),c:['#1F6FB2','#C0392B','#2E8B57','#8B5A2B'][i]}));
+    items=P.flatMap(x=>pick(x.k,2).map(([t,pg])=>({t:t.length>70?t.slice(0,68)+'…':t,a:x.c,r:x.n+' เล่ม '+x.v+' หน้า '+pg})))}
   else{const cs=['A11','A12','A13','A14','A15','A16'];bins=cs.map(c=>({k:c,n:GE[c].join(' + '),c:`linear-gradient(90deg,${GE[c].map(e=>EC[e]).join(',')})`}));
     items=cs.flatMap(c=>pick(Z.S.filter(s=>s.g===c),2).map(s=>({t:s.d.length>46?s.d.slice(0,45)+'…':s.d,a:c,r:short(s.ref)+' · อาการ: '+s.s.slice(0,4).join(' ')})))}
   items=sh(items);$('#bins').className='bins'+(lv==='2'?' bins6':'');
@@ -177,12 +189,15 @@ function bindCards(){
   document.querySelectorAll('.bin').forEach(b=>b.onclick=e=>{if(sel&&!e.target.closest('.card'))place(sel,b)})}
 function chkSort(){let ok=0,n=0;const wrong=[];document.querySelectorAll('#v-sort .card').forEach(c=>{const b=c.parentElement.closest('.bin');if(!b){c.classList.remove('ok','bad');return}n++;const good=b.dataset.k===c.dataset.a;c.classList.toggle('ok',good);c.classList.toggle('bad',!good);if(good)ok++;else wrong.push(c)});
   const tot=document.querySelectorAll('#v-sort .card').length;const r=$('#sortRes');r.hidden=false;
-  r.innerHTML=`<b>ถูก ${ok} จาก ${tot} ใบ</b>${n<tot?` <span class="note">(ยังไม่ได้วาง ${tot-n} ใบ)</span>`:''}`+(wrong.length?`<p class="note">ใบที่ผิด: คำตอบที่ถูกและที่มา</p>`+wrong.map(c=>`<div>• ${E(c.textContent)} → <b>${E($('#lvl').value==='1'?c.dataset.a:GE[c.dataset.a].join(' + '))}</b> <span class="ref">(${E(c.dataset.r)})</span></div>`).join(''):'<p>ยอดเยี่ยม จัดถูกทุกใบ</p>');
+  const lab=a=>$('#lvl').value==='1'?a:$('#lvl').value==='3'?(LIB.find(x=>x.c===a)||{}).n:GE[a].join(' + ');
+  r.innerHTML=`<b>ถูก ${ok} จาก ${tot} ใบ</b>${n<tot?` <span class="note">(ยังไม่ได้วาง ${tot-n} ใบ)</span>`:''}`+(wrong.length?`<p class="note">ใบที่ผิด: คำตอบที่ถูกและที่มา</p>`+wrong.map(c=>`<div>• ${E(c.textContent)} → <b>${E(lab(c.dataset.a))}</b> <span class="ref">(${E(c.dataset.r)})</span></div>`).join(''):(n===tot&&ok===tot?'<p>ยอดเยี่ยม จัดถูกทุกใบ</p>':''));
   if(n===tot){const s=st.get('sort',{p:0,ok:0,n:0});s.p++;s.ok+=ok;s.n+=tot;st.set('sort',s)}}
 /* ---------- quiz ---------- */
 const HT=Z.H.filter(h=>h.t.length&&!h.s),HP=Z.H.filter(h=>h.p),TAS=Object.keys(TC).filter(t=>t!=='ขื่น / เฝื่อน');
 function genQ(t){
-  if(t==='mix')t=pick(['dis','grp','tas','part','txt','adj','dis','grp'],1)[0];
+  if(t==='mix')t=pick(['dis','grp','tas','part','txt','adj','sec','key','key'],1)[0];
+  if(t==='sec'||t==='key'){const P=LIB.filter(x=>t==='sec'?x.toc.length:x.k.length);const x=pick(P,1)[0];const it=pick(t==='sec'?x.toc:x.k,1)[0];const o=pick([...new Set(LIB.map(y=>y.n).filter(v=>v!==x.n))],3);
+    return{q:(t==='sec'?'หัวข้อ “'+it[0]+'” อยู่ในคัมภีร์ใด':'“'+it[0]+'” มาจากคัมภีร์ใด'),a:x.n,o:sh([x.n,...o]),x:x.n+' เล่ม '+x.v+' หน้า '+it[1]}}
   if(t==='dis'){const x=pick(Z.S.filter(s=>s.s.length>=3),1)[0];const o=pick(Z.S.filter(s=>s.d!==x.d),3).map(s=>s.d);return{q:'อาการชุดนี้: “'+pick(x.s,Math.min(4,x.s.length)).join(' · ')+'” คือภาวะ/โรคใด',a:x.d,o:sh([x.d,...o]),x:short(x.ref)}}
   if(t==='grp'){const x=pick(Z.S,1)[0];const a=Z.G[x.g].d;const o=pick(Object.entries(Z.G).filter(([k])=>k!==x.g).map(([k,v])=>v.d),3);return{q:'“'+x.d+'” อยู่ในกลุ่มธาตุใด',a,o:sh([a,...o]),x:short(x.ref)+' · อาการ: '+x.s.slice(0,5).join(' ')}}
   if(t==='tas'){const x=pick(HT,1)[0];const a=x.t[0];const o=pick(TAS.filter(v=>v!==a),3);return{q:'ตัวยา “'+x.n+'” มีรสนำอะไร',a,o:sh([a,...o]),x:'รสทั้งหมด: '+x.t.join(' → ')+(x.q.length?' · สรรพคุณ: '+x.q.join(' '):'')}}
@@ -211,19 +226,33 @@ function mark(k){const sc=st.get('fc',{});const o=sc[cur.id]||{};o[k]=(o[k]||0)+
 $('#fc').onclick=$('#fFlip').onclick=()=>$('#fc').classList.toggle('flip');$('#fc').onkeydown=e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();$('#fc').classList.toggle('flip')}};
 $('#fKnow').onclick=()=>mark('k');$('#fAgain').onclick=()=>mark('a');$('#deck').onchange=nextCard;
 /* ---------- taste ---------- */
-function taste(){const cnt={};Z.H.forEach(h=>{if(h.t[0])cnt[h.t[0]]=(cnt[h.t[0]]||0)+1});
+function t9(){const L=[['ฝาด','ชอบสมาน'],['หวาน','ซาบเนื้อ'],['เมาเบื่อ','แก้พิษ'],['ขม','ดี โลหิตชอบขม'],['เผ็ดร้อน','ลมถอยถด'],['มัน','เอ็นชอบรสมัน'],['หอมเย็น','ชื่นใจ'],['เค็ม','ซาบในผิวหนัง'],['เปรี้ยว','เสมหะชอบส้ม']];
+  $('#t9').innerHTML=L.map(([t,a])=>`<details class="tz" style="background:${TC[t]||'#777'}"><summary><b style="display:inline">${t}</b> <span>แตะเพื่อดูหน้าที่</span></summary><span style="font-size:15px">${a}</span></details>`).join('')}
+function taste(){t9();const cnt={};Z.H.forEach(h=>{if(h.t[0])cnt[h.t[0]]=(cnt[h.t[0]]||0)+1});
   $('#tw').innerHTML=Object.keys(TC).map(t=>`<div class="tz" style="background:${TC[t]}"><b>${E(t)}</b><span>${cnt[t]||0} ตัวยามีรสนำนี้</span></div>`).join('');
   const by={};Z.H.filter(h=>h.t[0]).sort((a,b)=>b.k-a.k).forEach(h=>{(by[h.t[0]]=by[h.t[0]]||[]).length<8&&by[h.t[0]].push(h)});
   $('#tl').innerHTML=Object.entries(by).sort((a,b)=>(cnt[b[0]]||0)-(cnt[a[0]]||0)).map(([t,L])=>`<div class="row"><span class="el" style="background:${TC[t]||'#777'};min-width:84px;text-align:center">${E(t)}</span><div class="chips">${L.map(h=>`<span class="chip">${E(h.n)} <span class="note">${h.k}</span></span>`).join('')}</div></div>`).join('')}
+/* ---------- library ---------- */
+const LIB=window.LIB||[];let VF=0;
+function libg(){$('#libg').innerHTML=LIB.filter(x=>!VF||x.v===VF).map(x=>`<button class="g" data-c="${x.c}"><b>${E(x.n)}</b><small>เล่ม ${x.v} · หน้า ${E(x.p)} · ${E(x.st)}</small><div class="ex">${x.toc.length} หัวข้อ · ${x.k.length} สาระ · ${x.nf?x.nf+' ตำรับ (OCR)':(x.st.startsWith('มีแล้ว')?'ตำรับอยู่ในแท็บอื่น':'ไม่มีตำรับแบบสูตร')}</div></button>`).join('');
+  $('#libg').querySelectorAll('.g').forEach(b=>b.onclick=()=>libd(b.dataset.c))}
+function libd(c){const x=LIB.find(y=>y.c===c);const tc=t=>`<span class="el" style="background:${TC[{'เผ็ด':'เผ็ดร้อน','ร้อน':'เผ็ดร้อน','หอม':'หอมเย็น','เย็น':'หอมเย็น','เมา':'เมาเบื่อ','เบื่อ':'เมาเบื่อ'}[t]||t]||'#999'};font-weight:500">${E(t)}</span>`;
+  $('#libd').innerHTML=`<h3>${E(x.n)} <span class="note">เล่ม ${x.v} หน้า ${E(x.p)} · รหัส ${x.c}</span></h3>`+
+   (x.toc.length?`<b>หัวข้อ (ตามสารบาญ)</b><ol>${x.toc.map(([t,p])=>`<li>${E(t)} <span class="note">น.${p}</span></li>`).join('')}</ol>`:'')+
+   (x.k.length?`<b>สาระสำคัญจากหน้าหนังสือ</b><ul>${x.k.map(([t,p])=>`<li>${E(t)} <span class="note">(น.${p})</span></li>`).join('')}</ul>`:'')+
+   (x.nf?`<b>ตำรับยา ${x.nf} ขนาน</b> <span class="note">ถอดด้วยโปรแกรม · ตัวยาใช้บ่อย: ${x.top.map(([n,k])=>E(n)+' '+k).join(' · ')}${x.an.length?' · กระสาย: '+x.an.map(([n,k])=>E(n)+' '+k).join(' · '):''}</span>
+     <details><summary>เปิดรายการตำรับ</summary>${x.f.map(f=>`<div class="box" style="margin:6px 0"><b>${E(f.n)}</b> <span class="note">น.${f.pg} · รสประธาน (ประเมิน): ${E(f.r)} · กระสาย: ${E(f.u)}</span><div class="chips" style="margin-top:6px">${f.i.map(([n,t])=>`<span class="chip">${E(n)} ${t?tc(t):''}</span>`).join('')}</div>${f.ind?`<div class="note">${E(f.ind)}</div>`:''}</div>`).join('')}</details>`:(x.st.startsWith('มีแล้ว')?'<p class="note">เนื้อหาคัมภีร์นี้อยู่ในหน้า ทบทวน · ทายคำถาม · บัตรพลิก · รสยา</p>':''));
+  $('#libd').scrollIntoView({block:'nearest'})}
+$('#volf').querySelectorAll('button').forEach(b=>b.onclick=()=>{VF=+b.dataset.v;$('#volf').querySelectorAll('button').forEach(x=>x.classList.toggle('pri',x===b));libg()});
 /* ---------- score ---------- */
 function score(){const s=st.get('sort',{p:0,ok:0,n:0}),q=st.get('quiz',{p:0,ok:0,n:0}),f=Object.values(st.get('fc',{}));const pc=(a,b)=>b?Math.round(a*100/b)+'%':'-';
   $('#st').innerHTML=`<div><span class="note">คัดแยกลงถาด</span><div class="big">${pc(s.ok,s.n)}</div><span class="note">${s.p} รอบ · ${s.ok}/${s.n} ใบ</span></div><div><span class="note">ทายคำถาม</span><div class="big">${pc(q.ok,q.n)}</div><span class="note">${q.p} ชุด · ${q.ok}/${q.n} ข้อ</span></div><div><span class="note">บัตรพลิก</span><div class="big">${f.reduce((a,x)=>a+(x.k||0),0)}</div><span class="note">ครั้งที่จำได้ · ยังไม่แน่ใจ ${f.reduce((a,x)=>a+(x.a||0),0)}</span></div>`}
 $('#reset').onclick=()=>{['sort','quiz','fc'].forEach(k=>st.set(k,k==='fc'?{}:{p:0,ok:0,n:0}));score();toast('ล้างคะแนนแล้ว')};
 $('#newSort').onclick=newSort;$('#lvl').onchange=newSort;$('#chkSort').onclick=chkSort;
-function route(){const v=(location.hash||'#review').slice(1),ok=['review','sort','quiz','cards','taste','score'].includes(v)?v:'review';
+function route(){const v=(location.hash||'#review').slice(1),ok=['review','sort','quiz','cards','taste','library','score'].includes(v)?v:'review';
   document.querySelectorAll('section').forEach(s=>s.classList.toggle('on',s.id==='v-'+ok));document.querySelectorAll('nav a').forEach(a=>a.classList.toggle('on',a.dataset.v===ok));if(ok==='score')score()}
 addEventListener('hashchange',route);
-map();elkey();showG('A01');newSort();newQ();nextCard();taste();route();
+libg();map();elkey();showG('A01');newSort();newQ();nextCard();taste();route();
 }
 </script>
 </body>
