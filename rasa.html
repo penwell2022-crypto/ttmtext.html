@@ -87,6 +87,18 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--acc);outline-offset
 .bin h4{margin:0 0 4px;color:#fff;font-size:16px}
 .ref{font-size:13.5px;color:var(--mut)}
 footer{padding:22px 0 50px;font-size:14px;color:var(--mut)}
+.an{min-height:560px;background:linear-gradient(light-dark(#fbf8f3,#1b1a18),light-dark(#f2ede5,#211f1c))}
+.step{border-radius:14px;padding:14px 16px;margin:12px 0;background:var(--ink);color:var(--bg);min-height:96px;display:flex;flex-direction:column;gap:4px}
+.step b{font-size:21px;line-height:1.3}.step .mut{color:inherit;opacity:.8}
+#steplist{margin:4px 0;padding-left:20px}#steplist li.cur{font-weight:700}
+.pulse{animation:pu 1.2s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes pu{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(1.6);opacity:.25}}
+.spin{animation:sp 1.6s linear infinite;transform-box:fill-box;transform-origin:center}@keyframes sp{to{transform:rotate(360deg)}}
+.tap{animation:tp .6s ease-in-out infinite alternate}@keyframes tp{to{transform:translateY(-10px)}}
+.squeeze{animation:sq .8s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:center}@keyframes sq{to{transform:scaleX(.55)}}
+.flw{stroke-dasharray:6 6;animation:fl 1s linear infinite}@keyframes fl{to{stroke-dashoffset:-24}}
+@media(prefers-reduced-motion:reduce){.pulse,.spin,.tap,.squeeze,.flw{animation:none}}
+@media(max-width:600px){.an{min-height:480px}}
 @media(prefers-reduced-motion:reduce){.fc span{transition:none}}
 @media(max-width:820px){.dr,.bins{grid-template-columns:repeat(2,minmax(0,1fr))}.bodyw{grid-template-columns:minmax(0,1fr)}.flow{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:600px){.grid{grid-template-columns:76px repeat(3,minmax(0,1fr))}.cell{font-size:13px}.age{grid-template-columns:minmax(0,1fr)}.d{min-height:160px}.fig{min-height:400px}}
@@ -131,19 +143,18 @@ footer{padding:22px 0 50px;font-size:14px;color:var(--mut)}
 </section>
 
 <section id="body">
-  <h2>รสพายาไปถึงส่วนไหนของกาย</h2>
-  <p>เลือกคัมภีร์ แล้วแตะรส จุดบนร่างกายจะสว่าง · สลับคัมภีร์เพื่อดูว่าสองเล่มพูดไม่ตรงกันตรงไหน</p>
+  <h2>แตะตัวเองตามรส: รสพายาไปถึงส่วนไหนของกาย</h2>
+  <p>กด <b>เล่นทีละท่า</b> แล้วทำตามจุดที่กะพริบบนภาพ · ธาตุวิวรณ์ ล.2 น.240–241 มี 8 รส · ธาตุวิภังค์ ล.1 น.423 มี 4 รส</p>
+  <div class="row" id="srcb"><button data-s="vw" class="on">ธาตุวิวรณ์</button><button data-s="vb">ธาตุวิภังค์</button><button data-s="cmp">เทียบ: รสไหนย้ายที่</button></div>
   <div class="bodyw">
-    <div class="fig"><svg id="bsvg" viewBox="0 0 300 440" role="img" aria-label="แผนที่ร่างกาย"></svg></div>
+    <div class="fig an"><svg id="bsvg" viewBox="0 0 640 580" role="img" aria-label="ภาพร่างกายแสดงตำแหน่งที่รสยาซึมไป"></svg></div>
     <div>
-      <div class="row" id="srcb"><button data-s="vb" class="on">ธาตุวิภังค์ ล.1 น.423</button><button data-s="vw">ธาตุวิวรณ์ ล.2 น.240–241</button></div>
+      <div class="row"><button class="pri" id="play">▶ เล่นทีละท่า (2 รอบ)</button><button id="stop">หยุด</button><button id="next">ท่าถัดไป</button></div>
       <div class="chips" id="bchips"></div>
-      <p class="ans" id="bans">แตะรสด้านบน</p>
-      <div class="box do"><b>แตะตัวเองตามรส</b><ul>
-        <li>ขม: ลูบแขน (ผิวหนัง) · ฝาด: บีบต้นแขน (เนื้อ) · เค็ม: กดเอ็นข้อมือ</li>
-        <li>เผ็ดร้อน: เคาะกระดูกหน้าแข้ง · มัน: หมุนข้อมือ (ข้อ) · หอมเย็น: วางมือที่อก (หัวใจ)</li>
-        <li>หวาน / เปรี้ยว: วางมือที่ท้องล่าง / ท้องกลาง (ไส้ใหญ่ / ไส้น้อย)</li></ul>
-        <p class="mut">ชุดท่านี้ตามธาตุวิวรณ์ ทำ 2 รอบ แล้วสลับไปดูธาตุวิภังค์ ว่ารสไหนย้ายที่</p></div>
+      <div class="step" id="step"><b>เลือกรส หรือกดเล่น</b><span class="mut">จุดบนภาพจะบอกว่าต้องแตะตรงไหน</span></div>
+      <div class="box"><b>ท่าตามธาตุวิวรณ์</b>
+        <ul id="steplist"></ul>
+        <p class="mut">ทำ 2 รอบ แล้วกด “เทียบ” ดูว่ารสไหนย้ายที่ในธาตุวิภังค์ · ธาตุวิภังค์ไม่ได้กล่าวถึงขม หวาน หอมเย็น มัน</p></div>
     </div>
   </div>
 </section>
@@ -223,26 +234,77 @@ const N9=[['ฝาด','ชอบสมาน','#8C6D4F'],['หวาน','ซ�
 $('#fl').innerHTML=N9.map(([t,a,c])=>`<button class="fc" style="background:${c}"><b>${t}</b><span>${a}</span></button>`).join('');
 $$('.fc').forEach(b=>b.onclick=()=>b.classList.toggle('open'));
 $('#flAll').onclick=()=>$$('.fc').forEach(b=>b.classList.add('open'));$('#flHide').onclick=()=>$$('.fc').forEach(b=>b.classList.remove('open'));
-/* body map */
-const P={skin:[70,190,'ผิวหนัง'],flesh:[232,175,'เนื้อ'],tendon:[58,265,'เอ็น'],bone:[175,388,'กระดูก'],li:[150,250,'ไส้ใหญ่'],si:[150,218,'ไส้น้อย'],heart:[162,138,'หัวใจ'],joint:[118,330,'ข้อ'],hair:[150,28,'ขน']};
-const MAP={vb:{'ฝาด':['flesh','tendon'],'เผ็ด':['skin','hair'],'เค็ม':['tendon','bone'],'เปรี้ยว':['tendon']},
-           vw:{'ขม':['skin'],'ฝาด':['flesh'],'เค็ม':['tendon'],'เผ็ดร้อน':['bone'],'หวาน':['li'],'เปรี้ยว':['si'],'หอมเย็น':['heart'],'มัน':['joint']}};
-const BT={vb:{'ฝาด':'ผิวเนื้อ เอ็น และเส้น','เผ็ด':'ผิวหนังทุกเส้นขน','เค็ม':'ทุกเส้นเอ็นและกระดูกทั่วสรรพางค์กาย','เปรี้ยว':'เส้นเอ็นทั่วสรรพางค์กาย'}};
-let src='vb',hot=[];
-function body(){const s=$('#bsvg');const ink=getComputedStyle(document.body).color;
-  let h=`<g fill="none" stroke="${ink}" stroke-opacity=".35" stroke-width="3" stroke-linecap="round">
-  <circle cx="150" cy="48" r="28"/><path d="M150 76v14M100 98q50-16 100 0l14 120M100 98l-14 120M118 100v150q0 30 32 30t32-30V100"/>
-  <path d="M120 282l-8 140M180 282l8 140"/></g>
-  <g fill="${ink}" fill-opacity=".06"><path d="M104 100q46-14 92 0v160q0 26-46 26t-46-26z"/></g>`;
-  for(const k in P){const [x,y,l]=P[k],on=hot.includes(k);
-    h+=`<circle cx="${x}" cy="${y}" r="${on?13:7}" fill="${on?'#C0392B':ink}" fill-opacity="${on?1:.25}"/>`;
-    if(on)h+=`<text x="${x>150?x-18:x+18}" y="${y+5}" text-anchor="${x>150?'end':'start'}" font-size="15" font-weight="700" fill="${ink}" paint-order="stroke" style="stroke:var(--soft)" stroke-width="5">${l}</text>`}
-  s.innerHTML=h}
-function chips(){$('#bchips').innerHTML=Object.keys(MAP[src]).map(t=>`<button class="chip" data-t="${t}">${t}</button>`).join('');
-  $$('#bchips .chip').forEach(b=>b.onclick=()=>{$$('#bchips .chip').forEach(x=>x.classList.toggle('on',x===b));const t=b.dataset.t;hot=MAP[src][t];
-    $('#bans').textContent=`${t} → `+(BT[src]?.[t]||hot.map(k=>P[k][2]).join(' + '));body()})}
-$$('#srcb button').forEach(b=>b.onclick=()=>{src=b.dataset.s;$$('#srcb button').forEach(x=>x.classList.toggle('on',x===b));hot=[];$('#bans').textContent=src==='vb'?'ธาตุวิภังค์บอกไว้ 4 รส':'ธาตุวิวรณ์บอกไว้ 8 รส';chips();body()});
-chips();body();new ResizeObserver(body).observe($('#bsvg'));
+/* body map: anatomy */
+const SP={
+ skin:[226,258,'ผิวหนัง','L',258,'ผิวหนังปลายแขน'], flesh:[406,170,'เนื้อ','R',150,'เนื้อต้นแขน'], tendon:[220,318,'เอ็น','L',318,'เอ็นข้อมือ'],
+ bone:[352,478,'กระดูก','R',478,'กระดูกหน้าแข้ง'], joint:[420,318,'ข้อ','R',318,'ข้อมือ'], heart:[334,172,'หัวใจ','L',172,'อก'],
+ si:[320,262,'ไส้น้อย','R',240,'ท้องกลาง'], li:[320,312,'ไส้ใหญ่','L',372,'ท้องล่าง'], hair:[320,30,'ขนทั่วกาย','R',40,'ผิวทั่วตัว']};
+const ACT={skin:'ลูบแขน',flesh:'บีบต้นแขน',tendon:'กดเอ็นข้อมือ',bone:'เคาะกระดูกหน้าแข้ง',joint:'หมุนข้อมือ',heart:'วางมือที่อก',si:'วางมือที่ท้องกลาง',li:'วางมือที่ท้องล่าง',hair:'ลูบไล้ผิวทั่วตัว'};
+const VW=[['ขม','skin'],['ฝาด','flesh'],['เค็ม','tendon'],['เผ็ดร้อน','bone'],['มัน','joint'],['หอมเย็น','heart'],['หวาน','li'],['เปรี้ยว','si']];
+const VB={'ฝาด':['flesh','tendon'],'เผ็ด':['skin','hair'],'เค็ม':['tendon','bone'],'เปรี้ยว':['tendon']};
+const VBT={'ฝาด':'ผิวเนื้อ เอ็น และเส้น','เผ็ด':'ผิวหนังทุกเส้นขน','เค็ม':'ทุกเส้นเอ็นและกระดูกทั่วสรรพางค์กาย','เปรี้ยว':'เส้นเอ็นทั่วสรรพางค์กาย'};
+const MOVE=[['เผ็ด','bone','skin','เผ็ด: กระดูก → ผิวหนัง'],['เปรี้ยว','si','tendon','เปรี้ยว: ไส้น้อย → เอ็น'],['เค็ม','tendon','bone','เค็ม: เอ็น → เอ็น + กระดูก'],['ฝาด','flesh','tendon','ฝาด: เนื้อ → เนื้อ + เอ็น']];
+const TCOL={'ขม':'#3F7A31','ฝาด':'#8C6D4F','เค็ม':'#3E74A8','เผ็ดร้อน':'#C0392B','เผ็ด':'#C0392B','มัน':'#9C6B3A','หอมเย็น':'#6A58A6','หวาน':'#B58C10','เปรี้ยว':'#6E8A12'};
+let src='vw',hot=[],hc='#C0392B',cur=-1,timer=null,rounds=0;
+function fig(ink){return '<g transform="translate(60,0)">'+fig0(ink)+'</g>'}
+function fig0(ink){const ln=`stroke="${ink}" stroke-opacity=".5" stroke-width="2"`;
+ return `<defs><linearGradient id="skg" x1="0" x2="1"><stop offset="0" stop-color="#e9c4a4"/><stop offset=".5" stop-color="#f6dcc5"/><stop offset="1" stop-color="#e2b896"/></linearGradient></defs>
+ <g fill="url(#skg)" ${ln} stroke-linejoin="round">
+  <ellipse cx="260" cy="62" rx="34" ry="40"/><path d="M246 98h28v18h-28z"/>
+  <path d="M200 120q-30 8-34 38l-6 78q-4 40-6 80l-4 30q-2 14 8 16q10 2 12-12l8-34q8-40 12-80l12-70z"/>
+  <path d="M320 120q30 8 34 38l6 78q4 40 6 80l4 30q2 14-8 16q-10 2-12-12l-8-34q-8-40-12-80l-12-70z"/>
+  <path d="M202 330h116l-4 30q-6 60-10 110l-2 70q0 14-14 14h-6q-12 0-12-14l-2-70-8-96-8 96-2 70q0 14-12 14h-6q-14 0-14-14l-2-70q-4-50-10-110z"/>
+  <path d="M200 118q60-16 120 0q22 6 26 30l-4 70q-4 40-8 72q2 20 6 42h-160q4-22 6-42q-4-32-8-72l-4-70q4-24 26-30z"/>
+ </g>
+ <g fill="none" ${ln} stroke-opacity=".3"><path d="M226 140q34 14 68 0M222 156q38 14 76 0M220 172q40 14 80 0"/></g>
+ <g stroke="#efe6d8" stroke-width="6" stroke-linecap="round" opacity=".95"><path d="M232 384l2 150M288 384l-2 150"/></g>
+ <path d="M274 162c-8-10-22-2-16 10l16 16 16-16c6-12-8-20-16-10z" fill="#c8453a" opacity=".9"/>
+ <path d="M222 330v-70q0-10 10-10h56q10 0 10 10v70" fill="none" stroke="#a8743f" stroke-width="9" stroke-linecap="round" opacity=".8"/>
+ <path d="M240 252q20-10 40 0q8 12-6 18q-20 6-30-2q-10 10 4 18q18 8 30-2" fill="none" stroke="#d58b6d" stroke-width="6" stroke-linecap="round" opacity=".95"/>
+ <g stroke="#7d5a3c" stroke-width="2" opacity=".7"><path d="M156 304l2 26M164 304l1 26M364 304l-2 26M356 304l-1 26"/></g>`}
+function anim(k,x,y,c){
+ if(k==='skin'||k==='hair')return `<circle r="6" fill="${c}"><animateMotion dur="1.4s" repeatCount="indefinite" path="M${x+10} ${y-50} L${x-4} ${y+30}"/></circle>`;
+ if(k==='bone')return `<g class="tap"><circle cx="${x+26}" cy="${y-8}" r="8" fill="${c}"/></g>`;
+ if(k==='joint')return `<circle cx="${x}" cy="${y}" r="20" fill="none" stroke="${c}" stroke-width="3" stroke-dasharray="8 6" class="spin"/>`;
+ if(k==='flesh')return `<ellipse cx="${x}" cy="${y}" rx="22" ry="12" fill="none" stroke="${c}" stroke-width="3" class="squeeze"/>`;
+ if(k==='tendon')return `<circle cx="${x}" cy="${y}" r="15" fill="none" stroke="${c}" stroke-width="3" class="pulse"/>`;
+ return `<ellipse cx="${x}" cy="${y}" rx="30" ry="18" fill="${c}" opacity=".3" class="pulse"/>`}
+let FS=1;
+function label(k,c,txt,on){const [x,y,l,sd,ly]=SP[k];const lx=sd==='L'?10:630,ex=sd==='L'?190:450,hx=sd==='L'?178:462;
+ return `<path d="M${x} ${y}L${ex} ${ly}H${hx}" fill="none" stroke="${c}" stroke-width="${on?2.5:1.2}" opacity="${on?1:.55}"/>
+ <text x="${lx}" y="${ly+5}" text-anchor="${sd==='L'?'start':'end'}" font-size="${(on?15:13.5)*FS}" font-weight="${on?700:500}" fill="${c}" style="paint-order:stroke;stroke:light-dark(#f7f3ec,#1d1c1a);stroke-width:5px;stroke-linejoin:round">${txt}</text>`}
+function body(){const s=$('#bsvg');const W=s.clientWidth||640;FS=W<520?Math.min(1.9,600/W):1;const narrow=W<520;const ink=getComputedStyle(document.body).color;let h=fig(ink);
+ if(src==='cmp'){h+='<defs>'+MOVE.map(([t],i)=>`<marker id="ah${i}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="${TCOL[t]}"/></marker>`).join('')+'</defs>';
+   MOVE.forEach(([t,f,to],i)=>{const [x1,y1]=SP[f],[x2,y2]=SP[to],c=TCOL[t];
+   h+=`<path d="M${x1} ${y1}Q${(x1+x2)/2+(i%2?60:-60)} ${(y1+y2)/2} ${x2} ${y2}" fill="none" stroke="${c}" stroke-width="3" class="flw" marker-end="url(#ah${i})"/>
+   <circle cx="${x1}" cy="${y1}" r="7" fill="${c}" opacity=".4"/><circle cx="${x2}" cy="${y2}" r="9" fill="${c}"/>`});
+   h+=MOVE.map(([t,,,txt],i)=>`<text x="10" y="${430+i*30*FS}" font-size="${15*FS}" font-weight="700" fill="${TCOL[t]}" style="paint-order:stroke;stroke:light-dark(#f7f3ec,#1d1c1a);stroke-width:5px;stroke-linejoin:round">${txt}</text>`).join('');
+   s.innerHTML=h;return}
+ const all=src==='vw'?VW:Object.entries(VB).flatMap(([t,ks])=>ks.map(k=>[t,k]));
+ const seen=new Set();
+ all.forEach(([t,k])=>{const on=hot.includes(k),[x,y]=SP[k],c=on?hc:TCOL[t];
+   h+=`<circle cx="${x}" cy="${y}" r="${on?9:6}" fill="${c}" opacity="${on?1:.6}"/>`;
+   if(on)h+=anim(k,x,y,c);
+   if((on||(!hot.length&&!narrow))&&!seen.has(k)){seen.add(k);const ts=all.filter(v=>v[1]===k).map(v=>v[0]).join(' · ');h+=label(k,c,`${ts} → ${SP[k][2]}`,on)}});
+ s.innerHTML=h}
+function show(t,keys,msg,sub){hot=keys;hc=TCOL[t]||'#C0392B';$('#step').innerHTML=`<b>${msg}</b><span class="mut">${sub}</span>`;body()}
+function chips(){const L=src==='vw'?VW.map(x=>x[0]):src==='vb'?Object.keys(VB):[];
+ $('#bchips').innerHTML=L.map(t=>`<button class="chip" data-t="${t}">${t}</button>`).join('');
+ $$('#bchips .chip').forEach(b=>b.onclick=()=>{stop();$$('#bchips .chip').forEach(x=>x.classList.toggle('on',x===b));const t=b.dataset.t;
+   if(src==='vw'){const k=VW.find(v=>v[0]===t)[1];show(t,[k],`${t} → ${SP[k][2]}`,`ท่า: ${ACT[k]} · ธาตุวิวรณ์ ล.2 น.240–241`)}
+   else{const ks=VB[t];show(t,ks,`${t} → ${VBT[t]}`,`ท่า: ${ks.map(k=>ACT[k]).join(' + ')} · ธาตุวิภังค์ ล.1 น.423`)}})}
+$('#steplist').innerHTML=VW.map(([t,k],i)=>`<li>${t}: ${ACT[k]} (${SP[k][2]} · ${SP[k][5]})</li>`).join('');
+function step(i){cur=i;const [t,k]=VW[i];$$('#steplist li').forEach((li,j)=>li.classList.toggle('cur',j===i));
+ show(t,[k],`${i+1}/8 · ${ACT[k]}`,`${t} → ${SP[k][2]} · รอบที่ ${rounds+1}`)}
+function stop(){clearInterval(timer);timer=null;$$('#steplist li').forEach(li=>li.classList.remove('cur'))}
+function setSrc(v){src=v;$$('#srcb button').forEach(x=>x.classList.toggle('on',x.dataset.s===v));hot=[];chips();
+ $('#step').innerHTML=v==='cmp'?'<b>รสที่ย้ายที่เมื่อสลับเป็นธาตุวิภังค์</b><span class="mut">จุดจาง = ธาตุวิวรณ์ · จุดเข้มปลายลูกศร = ธาตุวิภังค์ · ขม หวาน หอมเย็น มัน ธาตุวิภังค์ไม่ได้กล่าวถึง</span>':v==='vb'?'<b>ธาตุวิภังค์ ล.1 น.423: 4 รส</b><span class="mut">แตะรสเพื่อดูตำแหน่งและท่า</span>':'<b>ธาตุวิวรณ์: 8 รส 8 ท่า</b><span class="mut">กดเล่นทีละท่า หรือแตะรส</span>';body()}
+$$('#srcb button').forEach(b=>b.onclick=()=>{stop();setSrc(b.dataset.s)});
+$('#play').onclick=()=>{stop();if(src!=='vw')setSrc('vw');rounds=0;step(0);timer=setInterval(()=>{let n=cur+1;if(n>=VW.length){n=0;rounds++}
+ if(rounds>=2){stop();setSrc('cmp');return}step(n)},3200)};
+$('#stop').onclick=stop;
+$('#next').onclick=()=>{stop();if(src!=='vw')setSrc('vw');step((cur+1)%VW.length)};
+setSrc('vw');new ResizeObserver(body).observe($('#bsvg'));
 /* age */
 const AG=[['ปฐมวัย','แรกเกิด – 16 ปี',C.w,'โรคมักเกิดเพราะเสมหะ · ห้ามรสหวานและเปรี้ยว (ตรงกับวรโยคสาร: หวาน เปรี้ยว ให้เสลดกำเริบ)'],
           ['มัชฌิมวัย','16 – 30 ปี',C.f,'โลหิตและกำเดาเป็นใหญ่ · ระวังรสเปรี้ยว ฝาด เค็ม และวางยาให้หย่อนลง'],
