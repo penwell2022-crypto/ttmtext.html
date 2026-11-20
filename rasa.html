@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>รสยา 4 คัมภีร์</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* VOICE: ครูแพทย์แผนไทยที่ให้ลงมือ ชิม แตะ จัด ไม่บรรยายยาว
+   IDEA: ตู้ยา 4 ลิ้นชัก แต่ละคัมภีร์คือลิ้นชักที่ตอบคำถามคนละข้อเรื่องรส
+   PICTURE: ลิ้นชัก 4 ใบสีธาตุบนสุด + แผนที่ร่างกายที่แตะรสแล้วจุดสว่าง
+   COLOUR+TYPE: ขาว/ดำอุ่น + สีธาตุ ดิน #8B5A2B น้ำ #1F6FB2 ลม #2E8B57 ไฟ #C0392B · IBM Plex Sans Thai
+   LAYOUT: ลิ้นชัก → รส×โทษ → รส 9 → แผนที่กาย → วัย/ฤดู → ใช้จริง → จุดขัด → เกมคัดแยก */
+:root{color-scheme:light dark;--bg:light-dark(#fff,#141311);--ink:light-dark(#1b1a19,#ece9e4);--mut:light-dark(#625d57,#aaa49c);--line:light-dark(#e3dfd8,#302d2a);--soft:light-dark(#f6f4f0,#1d1c1a);--acc:light-dark(#1f6fb2,#6aa9e0);--ok:#2E8B57;--bad:#C0392B;--up:#C0392B;--dn:#2E8B57;--e:#8B5A2B;--w:#1F6FB2;--a:#2E8B57;--f:#C0392B}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16.5px/1.6 "IBM Plex Sans Thai",Tahoma,sans-serif;overflow-x:clip}
+.stripe{display:grid;grid-template-columns:repeat(4,1fr);height:8px}.stripe i:nth-child(1){background:var(--e)}.stripe i:nth-child(2){background:var(--w)}.stripe i:nth-child(3){background:var(--a)}.stripe i:nth-child(4){background:var(--f)}
+.w{max-width:1120px;margin:auto;padding-inline:max(4vw,16px)}
+header{padding-top:20px}
+h1{font-size:clamp(28px,4vw,44px);line-height:1.08;margin:0 0 6px;text-wrap:balance}
+h2{font-size:clamp(22px,2.6vw,28px);line-height:1.2;margin:0 0 6px;text-wrap:balance}
+h3{font-size:18px;margin:12px 0 4px}
+p{margin:6px 0}.mut{color:var(--mut);font-size:14.5px}
+nav{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);margin-top:12px}
+nav .w{display:flex;gap:2px;overflow-x:auto}
+nav a{flex:none;padding:11px 12px;color:var(--mut);text-decoration:none;font-weight:600;font-size:15px;min-height:44px}
+nav a:hover{color:var(--ink)}
+section{padding:26px 0 10px;border-bottom:1px solid var(--line)}
+html{scroll-padding-top:60px}
+button{font:inherit;font-size:15.5px;padding:9px 14px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer;min-height:44px}
+button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+button.pri{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600}
+button:focus-visible,a:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}
+/* drawers */
+.dr{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:16px 0 6px}
+.d{border-radius:16px;color:#fff;padding:16px 16px 14px;position:relative;box-shadow:0 6px 0 rgba(0,0,0,.18);min-height:190px;display:flex;flex-direction:column;gap:6px;text-align:left;border:0;cursor:pointer}
+.d::after{content:"";position:absolute;left:50%;top:12px;width:42px;height:8px;margin-left:-21px;border-radius:5px;background:rgba(255,255,255,.55)}
+.d b{font-size:19px;margin-top:14px;line-height:1.2}.d .q{font-size:17px;font-weight:600;line-height:1.35}.d small{opacity:.92;font-size:13.5px;margin-top:auto}
+.d.sel{outline:4px solid var(--ink);outline-offset:3px}
+.box{border:1px solid var(--line);border-radius:14px;background:var(--soft);padding:14px 16px;margin:12px 0}
+.do{border-left:5px solid var(--acc)}
+.do b{display:block;margin-bottom:2px}
+.do ol,.do ul{margin:4px 0;padding-left:22px}
+/* rasa x dosha */
+.grid{display:grid;grid-template-columns:110px repeat(3,minmax(0,1fr));gap:6px;margin-top:10px}
+.grid div{border-radius:10px;padding:8px;text-align:center;font-weight:600}
+.grid .h{background:var(--soft);border:1px solid var(--line)}
+.cell{border:1px solid var(--line);min-height:48px;display:flex;align-items:center;justify-content:center;font-size:15px}
+.cell.up{background:light-dark(#fbe4e1,#3a1b18);color:light-dark(#8e2318,#ffb3a8)}
+.cell.dn{background:light-dark(#e3f2e7,#173222);color:light-dark(#1e6b40,#9fe0b8)}
+.tbtn.on{outline:3px solid var(--ink)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:14px;color:var(--mut)}
+.legend i{display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;margin-right:4px}
+/* flip */
+.fl{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:10px}
+.fc{border-radius:12px;padding:12px;min-height:92px;color:#fff;cursor:pointer;border:0;text-align:left;font:inherit}
+.fc b{font-size:20px;display:block}.fc span{font-size:14.5px;opacity:0;transition:opacity .2s}.fc.open span{opacity:1}
+/* body */
+.bodyw{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:18px;align-items:start}
+.fig{position:relative;min-height:440px;background:var(--soft);border-radius:16px;border:1px solid var(--line)}
+.fig svg{position:absolute;inset:0;width:100%;height:100%}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border-radius:999px;padding:6px 12px;font-size:15px;border:1px solid var(--line);background:var(--bg);cursor:pointer;min-height:40px;color:var(--ink)}
+.chip.on{background:var(--ink);color:var(--bg)}
+.ans{font-size:17px;font-weight:600;margin-top:8px;min-height:52px}
+/* age */
+.age{display:grid;grid-template-columns:1fr 1fr 1.3fr;gap:6px;margin-top:10px}
+.age button{border:0;color:#fff;text-align:left;border-radius:12px;padding:12px;min-height:84px}
+.age button b{display:block;font-size:17px}
+.age button.on{outline:4px solid var(--ink);outline-offset:2px}
+/* flow */
+.flow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;counter-reset:s;margin-top:10px}
+.st{border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--bg);position:relative}
+.st .n{width:34px;height:34px;border-radius:50%;background:var(--ink);color:var(--bg);display:grid;place-items:center;font-weight:700;margin-bottom:6px}
+.cf{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.cf .box{margin:0}
+.vs{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;margin:6px 0}
+.vs span{font-weight:600}.vs em{font-style:normal;color:var(--mut);font-size:13px}
+/* game */
+.pool{display:flex;flex-wrap:wrap;gap:8px;min-height:60px;padding:10px;border:2px dashed var(--line);border-radius:12px}
+.card{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:8px 12px;cursor:pointer;font-size:15px;user-select:none}
+.card.sel{outline:3px solid var(--acc)}.card.ok{border-color:var(--ok);background:light-dark(#e6f4ea,#173222)}.card.bad{border-color:var(--bad);background:light-dark(#fbe4e1,#3a1b18)}
+.bins{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:10px}
+.bin{border-radius:14px;min-height:150px;padding:10px;display:flex;flex-direction:column;gap:6px;cursor:pointer}
+.bin h4{margin:0 0 4px;color:#fff;font-size:16px}
+.ref{font-size:13.5px;color:var(--mut)}
+footer{padding:22px 0 50px;font-size:14px;color:var(--mut)}
+@media(prefers-reduced-motion:reduce){.fc span{transition:none}}
+@media(max-width:820px){.dr,.bins{grid-template-columns:repeat(2,minmax(0,1fr))}.bodyw{grid-template-columns:minmax(0,1fr)}.flow{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:600px){.grid{grid-template-columns:76px repeat(3,minmax(0,1fr))}.cell{font-size:13px}.age{grid-template-columns:minmax(0,1fr)}.d{min-height:160px}.fig{min-height:400px}}
+</style>
+</head>
+<body>
+<div class="stripe"><i></i><i></i><i></i><i></i></div>
+<header class="w">
+  <h1>รสยา 4 คัมภีร์: คนละคัมภีร์ ถามคนละคำถาม</h1>
+  <p class="mut">จากแพทยศาสตร์สงเคราะห์ เล่ม 1–2 · เลขหน้าเป็นเลขที่พิมพ์ในเล่ม · <a href="https://penwell2022-crypto.github.io/ttmtext.html/">กลับหน้าฝึกธาตุ 4</a></p>
+  <div class="dr" id="dr"></div>
+  <div class="box do" id="drx"><b>แตะลิ้นชักด้านบน</b>เพื่อดูว่าคัมภีร์นั้นใช้รสทำอะไร และใช้ตอนไหน</div>
+</header>
+<nav><div class="w"><a href="#dosha">รส × โทษ</a><a href="#nine">รส 9</a><a href="#body">รสไปไหน</a><a href="#age">วัยและฤดู</a><a href="#use">ใช้จริง 3 ขั้น</a><a href="#clash">จุดที่ขัดกัน</a><a href="#game">เกมคัดแยก</a></div></nav>
+<main class="w">
+
+<section id="dosha">
+  <h2>วรโยคสาร: รสหนึ่งรส กระพือโทษหนึ่ง แต่ดับอีกโทษหนึ่ง</h2>
+  <p>แตะรส แล้วดูว่าช่องไหนแดง (ทำให้กำเริบ) ช่องไหนเขียว (ใช้ระงับ) · รสลักษณะ น.46 · เหตุกำเริบ น.47 · โทสสมนะ น.48–49</p>
+  <div class="row" id="tbtns"></div>
+  <div class="legend"><span><i style="background:var(--up)"></i>ทำให้กำเริบ</span><span><i style="background:var(--dn)"></i>ใช้ระงับ</span><span><i style="background:var(--line)"></i>ตำราไม่ได้ระบุ</span></div>
+  <div class="grid" id="grid"></div>
+  <p class="ans" id="tans"></p>
+  <div class="box do"><b>ลงมือทำ 1 นาที</b><ol>
+    <li>ชิมมะนาวหนึ่งหยด พูดออกเสียงว่า "เปรี้ยว กระพือดี กระพือเสลด แต่ดับลม"</li>
+    <li>ชูนิ้ว 3 นิ้วแทนโทษ 3 แล้วพับนิ้วที่รสนั้นทำให้กำเริบ ทำให้ครบ 6 รส</li>
+    <li>ลองอธิบายให้คนข้างๆ ฟังว่าทำไมสมอแก้ได้ทั้ง 3 โทษ (เฉลยในกล่องล่าง)</li></ol></div>
+  <div class="box"><b>ตัวอย่างจากตำรา: สมอ (น.70–71)</b>
+    <p>"สมออันมีรสหวาน รสเปรี้ยว เหตุนั้นจึงแก้ลม" · รสเผ็ดและขม จึงแก้เสมหะ · รสฝาดและหวาน จึงแก้ปิตตะ</p>
+    <p class="mut">วรโยคสารใช้หลักรสอธิบายว่าตัวยาเดียวแก้หลายโทษได้ เพราะมีหลายรส · ลำดับประกอบรส (น.46): หวานก่อน → เค็มและเปรี้ยวกลาง → รสทั้งปวงท้าย</p></div>
+</section>
+
+<section id="nine">
+  <h2>ฉันทศาสตร์: รส 9 ชอบอะไร</h2>
+  <p>ทายก่อนในใจ แล้วแตะบัตรเพื่อพลิกดูคำตอบ · ฉันทศาสตร์ ล.1 น.17 (หัวข้อกำเนิดไข้ด้วยที่อยู่ ฤดู อาหาร)</p>
+  <div class="fl" id="fl"></div>
+  <div class="row"><button id="flAll">พลิกทั้งหมด</button><button id="flHide">ปิดทั้งหมด</button></div>
+  <div class="box"><b>กระสายตามโทษ (ฉันทศาสตร์ ล.1 น.53)</b>
+    <p>โลหิตชอบกระสายเปรี้ยว (ส้ม มะขามเปียก ผักส้มป่อย) · ดีชอบรสขม (บอระเพ็ด กระดอม) · ลมชอบเผ็ดร้อน (ขิง ดีปลี)</p>
+    <p><b>รสน้ำนมบอกโทษ (น.20–21):</b> น้ำนมรสเปรี้ยว สีขุ่นเขียว คาว = ลมกำเริบ · น้ำนมรสฝาด = โทษเตโช</p>
+    <p class="mut">ฉันทศาสตร์ใช้รสเป็นทั้งตัวเลือกยา ตัวเลือกกระสาย และเครื่องวินิจฉัย</p></div>
+</section>
+
+<section id="body">
+  <h2>รสพายาไปถึงส่วนไหนของกาย</h2>
+  <p>เลือกคัมภีร์ แล้วแตะรส จุดบนร่างกายจะสว่าง · สลับคัมภีร์เพื่อดูว่าสองเล่มพูดไม่ตรงกันตรงไหน</p>
+  <div class="bodyw">
+    <div class="fig"><svg id="bsvg" viewBox="0 0 300 440" role="img" aria-label="แผนที่ร่างกาย"></svg></div>
+    <div>
+      <div class="row" id="srcb"><button data-s="vb" class="on">ธาตุวิภังค์ ล.1 น.423</button><button data-s="vw">ธาตุวิวรณ์ ล.2 น.240–241</button></div>
+      <div class="chips" id="bchips"></div>
+      <p class="ans" id="bans">แตะรสด้านบน</p>
+      <div class="box do"><b>แตะตัวเองตามรส</b><ul>
+        <li>ขม: ลูบแขน (ผิวหนัง) · ฝาด: บีบต้นแขน (เนื้อ) · เค็ม: กดเอ็นข้อมือ</li>
+        <li>เผ็ดร้อน: เคาะกระดูกหน้าแข้ง · มัน: หมุนข้อมือ (ข้อ) · หอมเย็น: วางมือที่อก (หัวใจ)</li>
+        <li>หวาน / เปรี้ยว: วางมือที่ท้องล่าง / ท้องกลาง (ไส้ใหญ่ / ไส้น้อย)</li></ul>
+        <p class="mut">ชุดท่านี้ตามธาตุวิวรณ์ ทำ 2 รอบ แล้วสลับไปดูธาตุวิภังค์ ว่ารสไหนย้ายที่</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="age">
+  <h2>ธาตุวิวรณ์: อายุเท่านี้ ระวังรสอะไร · ธาตุวิภังค์: ฤดูนี้ ใช้ส่วนไหนของต้น</h2>
+  <p>แตะช่วงวัย · ธาตุวิวรณ์ ล.2 น.240</p>
+  <div class="age" id="ageb"></div>
+  <p class="ans" id="aans"></p>
+  <h3>ธาตุวิภังค์ ล.1 น.423: ฤทธิ์ยาอยู่ส่วนไหนตามฤดู</h3>
+  <div class="age" id="seab"></div>
+  <div class="box"><b>หลักของธาตุวิภังค์ (ล.1 น.393)</b>
+    <p>"ให้เอายาประจำฤดูธาตุอันนั้นตั้งไว้เป็นประธาน" แล้วประสมยาประจำธาตุตามวันเดือนปีเกิด แซกเครื่องหอมเย็น: จันทน์ทั้ง 2 กฤษณา ชะลูด ดอกพิกุล บุนนาค สารภี เกสรบัวหลวง ขอนดอก</p>
+    <p class="mut">ธาตุวิภังค์จึงไม่ได้เริ่มที่รส แต่เริ่มที่ธาตุและฤดู ส่วนรสใช้บอกทางไปของยา</p></div>
+</section>
+
+<section id="use">
+  <h2>ใช้จริง 3 ขั้น: เริ่มที่ธาตุ เลือกรส แล้วปรับตามคน</h2>
+  <div class="flow">
+    <div class="st"><div class="n">1</div><b>ตั้งประธาน</b><p>ธาตุวิภังค์: ดูธาตุและฤดูที่เจ็บป่วย เลือกยาประจำฤดูธาตุเป็นตัวหลัก</p></div>
+    <div class="st"><div class="n">2</div><b>เลือกรส และเช็กแสลง</b><p>วรโยคสาร + ฉันทศาสตร์: เลือกรสที่ระงับโทษ แล้วเช็กว่ารสนั้นไม่ไปกระพือโทษอื่นที่เปราะอยู่ เลือกกระสายตามโทษ</p></div>
+    <div class="st"><div class="n">3</div><b>ปรับตามวัยและเป้าหมาย</b><p>ธาตุวิวรณ์: ดูวัยว่าต้องงดรสใด และให้รสพายาไปถึงกองที่ต้องการ (หนัง เนื้อ เอ็น กระดูก)</p></div>
+  </div>
+  <div class="box do"><b>ลองเอง: ผู้ป่วยอายุ 45 ปี ลมกำเริบ</b>
+    <ol><li>ขั้น 1: ลมเป็นใหญ่ ใช้ยาประจำธาตุลมเป็นประธาน</li><li>ขั้น 2: ตาม <a href="#dosha">ตาราง</a> รสไหนระงับลม รสไหนกระพือ</li><li>ขั้น 3: วัยนี้อยู่ช่วงไหน ต้องงดรสอะไร</li></ol>
+    <details><summary>ดูเฉลย</summary><p>ระงับลมด้วยหวาน เปรี้ยว (วรโยคสาร น.48) · กระสายเผ็ดร้อน เช่น ขิง ดีปลี (ฉันทศาสตร์ น.53) · อายุ 45 เป็นปัจฉิมวัย ให้ระวังรสขม ร้อน เค็ม ฝาด (ธาตุวิวรณ์ น.240) · สังเกต: เผ็ดร้อนเป็นกระสายแก้ลมในฉันทศาสตร์ แต่วรโยคสารว่าเผ็ดกระพือลม ใช้เป็นกระสายนำยาได้ แต่ไม่ควรให้เป็นรสหลักที่กินมาก</p></details></div>
+</section>
+
+<section id="clash">
+  <h2>จุดที่ตำราพูดไม่ตรงกัน: จดแยก อย่ารวม</h2>
+  <div class="cf">
+    <div class="box"><b>รสเผ็ดไปไหน</b><div class="vs"><span>ผิวหนัง</span><em>vs</em><span>กระดูก</span></div><p class="ref">ธาตุวิภังค์ น.423 · ธาตุวิวรณ์ น.240–241 (ธาตุวิวรณ์ให้ขมเป็นรสที่ไปผิวหนัง)</p></div>
+    <div class="box"><b>รสเค็มไปไหน</b><div class="vs"><span>เอ็น + กระดูก</span><em>vs</em><span>เอ็น</span></div><p class="ref">ธาตุวิภังค์ น.423 · ธาตุวิวรณ์ น.240–241</p></div>
+    <div class="box"><b>เปรี้ยวกับเสมหะ</b><div class="vs"><span>เสมหะชอบส้ม</span><em>vs</em><span>ให้เสลดกำเริบ</span></div><p class="ref">ฉันทศาสตร์ น.17 · วรโยคสาร น.46 · ธาตุวิวรณ์ห้ามเปรี้ยวในปฐมวัย น.240</p><p>ใช้เป็นยาในขนาดจำกัด = กัดเสมหะ · กินเป็นอาหารมากเกิน = กระพือเสมหะ</p></div>
+    <div class="box"><b>ที่ตรงกัน</b><p>"ดีชอบขม" (ฉันทศาสตร์ น.17, 53) = ระงับดีด้วยขม (วรโยคสาร น.48) · ห้ามหวานในเด็ก (ธาตุวิวรณ์ น.240) = หวานให้เสลดกำเริบ (วรโยคสาร น.46)</p></div>
+  </div>
+</section>
+
+<section id="game">
+  <h2>เกมคัดแยก: ข้อความนี้มาจากคัมภีร์ไหน</h2>
+  <p class="mut">แตะการ์ดหนึ่งใบ แล้วแตะลิ้นชักที่คิดว่าถูก · แตะการ์ดในลิ้นชักเพื่อหยิบกลับ</p>
+  <div class="pool" id="pool"></div>
+  <div class="bins" id="bins"></div>
+  <div class="row"><button class="pri" id="chk">ตรวจคำตอบ</button><button id="again">สุ่มใหม่</button><span id="score" class="mut"></span></div>
+  <div id="gres"></div>
+</section>
+</main>
+<footer class="w">ข้อความอ่านจากภาพสแกนหน้าหนังสือ คำบางคำยังอ่านไม่ชัด เช่น รสที่ห้ามในปฐมวัย (ธาตุวิวรณ์ น.240) และรายการรสซึมของธาตุวิวรณ์หน้า 241 ควรเทียบกับเล่มจริงก่อนใช้ · สื่อเพื่อการเรียน ไม่ใช่คำแนะนำการรักษา</footer>
+<script>
+{
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const C={e:'#8B5A2B',w:'#1F6FB2',a:'#2E8B57',f:'#C0392B'};
+const TX=[
+ {k:'ch',n:'ฉันทศาสตร์',c:C.e,q:'รสนี้ชอบอะไร เข้ากับอะไร',p:'ล.1 น.17, 20–21, 53',x:'ใช้รสเป็นแผนที่พื้นฐาน: รส 9 กับหน้าที่ · รสกระสายตามโทษ · รสน้ำนมบอกโทษ ใช้ตอนเลือกรสยา เลือกกระสาย และอ่านโรคจากรส'},
+ {k:'vr',n:'วรโยคสาร',c:C.f,q:'รสนี้กระพือหรือดับโทษไหน',p:'ล.2 น.46–49, 70–71',x:'ใช้รส 6 กับโทษ 3 (ลม ดี เสลด): หาเหตุกำเริบ ห้ามแสลง ระงับโทษ และอธิบายว่าตัวยาเดียวแก้หลายโทษเพราะมีหลายรส'},
+ {k:'vb',n:'ธาตุวิภังค์',c:C.a,q:'ฤดูนี้ธาตุไหน ยาจะไปถึงไหน',p:'ล.1 น.393, 423',x:'เริ่มจากยาประจำฤดูธาตุเป็นประธาน แล้วใช้รสบอกทางที่ยาซึมไป (ผิว เนื้อ เอ็น กระดูก) และใช้ส่วนของต้นตามฤดู'},
+ {k:'vw',n:'ธาตุวิวรณ์',c:C.w,q:'อายุเท่านี้ ระวังรสอะไร',p:'ล.2 น.221, 240–241',x:'ใช้รสตามวัย (ปฐม มัชฌิม ปัจฉิม) บอกที่ที่รสซึมไปละเอียดถึงไส้ หัวใจ ข้อ และเลือกกระสายตรงข้ามโทษ เช่น ไฟใช้น้ำเย็น'}];
+$('#dr').innerHTML=TX.map(t=>`<button class="d" data-k="${t.k}" style="background:${t.c}"><b>${t.n}</b><span class="q">“${t.q}”</span><small>${t.p}</small></button>`).join('');
+$$('.d').forEach(b=>b.onclick=()=>{const t=TX.find(x=>x.k===b.dataset.k);$$('.d').forEach(x=>x.classList.toggle('sel',x===b));$('#drx').innerHTML=`<b>${t.n} · ${t.p}</b>${t.x}`});
+/* rasa x dosha (วรโยคสาร) */
+const D=['ลม','ดี','เสลด'];
+const R={'หวาน':['dn','','up'],'เปรี้ยว':['dn','up','up'],'เค็ม':['','up','up'],'เผ็ด':['up','up','dn'],'ขม':['up','dn','dn'],'ฝาด':['up','dn','']};
+const RC={'หวาน':'#B58C10','เปรี้ยว':'#6E8A12','เค็ม':'#3E74A8','เผ็ด':'#C0392B','ขม':'#3F7A31','ฝาด':'#8C6D4F'};
+const NOTE={'หวาน':'ชอบกับกาย เจริญรสธาตุ','เปรี้ยว':'ทำให้ลม ดี เสลด อนุโลม','เค็ม':'เผาโทษ เจริญไฟธาตุ','เผ็ด':'ระงับพิษ เจริญไฟธาตุ ให้อาหารสุก','ขม':'เจริญไฟธาตุ แก้ร้อน แก้กระหาย ชำระมูตรคูถ','ฝาด':'เจริญไฟธาตุ แก้กระหาย เจริญผิวและเนื้อ'};
+let curT=null;
+function grid(){let h='<div class="h">รส</div>'+D.map(d=>`<div class="h">${d}</div>`).join('');
+  for(const r in R){const on=!curT||curT===r;h+=`<div style="background:${RC[r]};color:#fff;opacity:${on?1:.35}">${r}</div>`+R[r].map(v=>`<div class="cell ${on?v:''}">${on?(v==='up'?'↑ กำเริบ':v==='dn'?'↓ ระงับ':'–'):''}</div>`).join('')}
+  $('#grid').innerHTML=h}
+$('#tbtns').innerHTML=Object.keys(R).map(r=>`<button class="tbtn" data-r="${r}" style="border-color:${RC[r]}">${r}</button>`).join('')+'<button id="tAll">ดูทั้งหมด</button>';
+$$('.tbtn').forEach(b=>b.onclick=()=>{curT=b.dataset.r;$$('.tbtn').forEach(x=>x.classList.toggle('on',x===b));const v=R[curT];
+  const up=D.filter((d,i)=>v[i]==='up'),dn=D.filter((d,i)=>v[i]==='dn');
+  $('#tans').innerHTML=`${curT}: ${NOTE[curT]} · กระพือ <span style="color:var(--up)">${up.join(' ')||'–'}</span> · ใช้ระงับ <span style="color:var(--dn)">${dn.join(' ')||'–'}</span>`;grid()});
+$('#tAll').onclick=()=>{curT=null;$$('.tbtn').forEach(x=>x.classList.remove('on'));$('#tans').textContent='ทุกรสพร้อมกัน: สังเกตว่าเปรี้ยวกับเค็มแดง 2 ช่อง ขมเขียว 2 ช่อง';grid()};
+grid();
+/* รส 9 */
+const N9=[['ฝาด','ชอบสมาน','#8C6D4F'],['หวาน','ซาบเนื้อ','#B58C10'],['เมาเบื่อ','แก้พิษ','#5E5E5E'],['ขม','ดี โลหิต ชอบขม','#3F7A31'],['เผ็ดร้อน','ลมถอยถด','#C0392B'],['มัน','เอ็นชอบรสมัน','#9C6B3A'],['หอมเย็น','ชื่นใจ','#6A58A6'],['เค็ม','ซาบในผิวหนัง','#3E74A8'],['เปรี้ยว (ส้ม)','เสมหะชอบส้ม','#6E8A12']];
+$('#fl').innerHTML=N9.map(([t,a,c])=>`<button class="fc" style="background:${c}"><b>${t}</b><span>${a}</span></button>`).join('');
+$$('.fc').forEach(b=>b.onclick=()=>b.classList.toggle('open'));
+$('#flAll').onclick=()=>$$('.fc').forEach(b=>b.classList.add('open'));$('#flHide').onclick=()=>$$('.fc').forEach(b=>b.classList.remove('open'));
+/* body map */
+const P={skin:[70,190,'ผิวหนัง'],flesh:[232,175,'เนื้อ'],tendon:[58,265,'เอ็น'],bone:[175,388,'กระดูก'],li:[150,250,'ไส้ใหญ่'],si:[150,218,'ไส้น้อย'],heart:[162,138,'หัวใจ'],joint:[118,330,'ข้อ'],hair:[150,28,'ขน']};
+const MAP={vb:{'ฝาด':['flesh','tendon'],'เผ็ด':['skin','hair'],'เค็ม':['tendon','bone'],'เปรี้ยว':['tendon']},
+           vw:{'ขม':['skin'],'ฝาด':['flesh'],'เค็ม':['tendon'],'เผ็ดร้อน':['bone'],'หวาน':['li'],'เปรี้ยว':['si'],'หอมเย็น':['heart'],'มัน':['joint']}};
+const BT={vb:{'ฝาด':'ผิวเนื้อ เอ็น และเส้น','เผ็ด':'ผิวหนังทุกเส้นขน','เค็ม':'ทุกเส้นเอ็นและกระดูกทั่วสรรพางค์กาย','เปรี้ยว':'เส้นเอ็นทั่วสรรพางค์กาย'}};
+let src='vb',hot=[];
+function body(){const s=$('#bsvg');const ink=getComputedStyle(document.body).color;
+  let h=`<g fill="none" stroke="${ink}" stroke-opacity=".35" stroke-width="3" stroke-linecap="round">
+  <circle cx="150" cy="48" r="28"/><path d="M150 76v14M100 98q50-16 100 0l14 120M100 98l-14 120M118 100v150q0 30 32 30t32-30V100"/>
+  <path d="M120 282l-8 140M180 282l8 140"/></g>
+  <g fill="${ink}" fill-opacity=".06"><path d="M104 100q46-14 92 0v160q0 26-46 26t-46-26z"/></g>`;
+  for(const k in P){const [x,y,l]=P[k],on=hot.includes(k);
+    h+=`<circle cx="${x}" cy="${y}" r="${on?13:7}" fill="${on?'#C0392B':ink}" fill-opacity="${on?1:.25}"/>`;
+    if(on)h+=`<text x="${x>150?x-18:x+18}" y="${y+5}" text-anchor="${x>150?'end':'start'}" font-size="15" font-weight="700" fill="${ink}" paint-order="stroke" style="stroke:var(--soft)" stroke-width="5">${l}</text>`}
+  s.innerHTML=h}
+function chips(){$('#bchips').innerHTML=Object.keys(MAP[src]).map(t=>`<button class="chip" data-t="${t}">${t}</button>`).join('');
+  $$('#bchips .chip').forEach(b=>b.onclick=()=>{$$('#bchips .chip').forEach(x=>x.classList.toggle('on',x===b));const t=b.dataset.t;hot=MAP[src][t];
+    $('#bans').textContent=`${t} → `+(BT[src]?.[t]||hot.map(k=>P[k][2]).join(' + '));body()})}
+$$('#srcb button').forEach(b=>b.onclick=()=>{src=b.dataset.s;$$('#srcb button').forEach(x=>x.classList.toggle('on',x===b));hot=[];$('#bans').textContent=src==='vb'?'ธาตุวิภังค์บอกไว้ 4 รส':'ธาตุวิวรณ์บอกไว้ 8 รส';chips();body()});
+chips();body();new ResizeObserver(body).observe($('#bsvg'));
+/* age */
+const AG=[['ปฐมวัย','แรกเกิด – 16 ปี',C.w,'โรคมักเกิดเพราะเสมหะ · ห้ามรสหวานและเปรี้ยว (ตรงกับวรโยคสาร: หวาน เปรี้ยว ให้เสลดกำเริบ)'],
+          ['มัชฌิมวัย','16 – 30 ปี',C.f,'โลหิตและกำเดาเป็นใหญ่ · ระวังรสเปรี้ยว ฝาด เค็ม และวางยาให้หย่อนลง'],
+          ['ปัจฉิมวัย','30 ปีขึ้นไป',C.a,'วาตาเข้ากระพือ · ห้ามรสขม ร้อน เค็ม ฝาด (ตรงกับวรโยคสาร: เผ็ด ขม ฝาด ให้ลมกำเริบ)']];
+$('#ageb').innerHTML=AG.map((a,i)=>`<button data-i="${i}" style="background:${a[2]}"><b>${a[0]}</b>${a[1]}</button>`).join('');
+$$('#ageb button').forEach(b=>b.onclick=()=>{$$('#ageb button').forEach(x=>x.classList.toggle('on',x===b));const a=AG[b.dataset.i];$('#aans').textContent=a[0]+': '+a[3]});
+const SE=[['คิมหันตฤดู','ฤทธิ์ยาอยู่ที่ราก',C.f],['วสันตฤดู','ฤทธิ์ยาอยู่ที่ใบ',C.a],['เหมันตฤดู','ฤทธิ์ยาอยู่ที่เปลือก',C.w]];
+$('#seab').innerHTML=SE.map(a=>`<button style="background:${a[2]}"><b>${a[0]}</b>${a[1]}</button>`).join('');
+/* game */
+const G=[['รสฝาดชอบสมาน รสหวานซาบเนื้อ','ch','น.17'],['เสมหะชอบส้ม','ch','น.17'],['โลหิตชอบกระสายเปรี้ยว ดีชอบรสขม','ch','น.53'],['น้ำนมรสเปรี้ยว สีขุ่นเขียว = ลมกำเริบ','ch','น.20–21'],
+ ['เผ็ด ขม ฝาด ทั้ง 3 นี้ให้ลมกำเริบ','vr','น.46'],['ประกอบรสหวานเป็นปฐม เค็ม เปรี้ยวเป็นท่ามกลาง','vr','น.46'],['สมอรสหวาน เปรี้ยว จึงแก้ลม','vr','น.70–71'],['ระงับดีด้วยรสขม หวาน ฝาด ของเย็น','vr','น.48'],
+ ['ให้เอายาประจำฤดูธาตุตั้งไว้เป็นประธาน','vb','น.393'],['รสยาเผ็ดซาบไปในผิวหนังทุกเส้นขน','vb','น.423'],['คิมหันต์ พิษยาอยู่ราก · เหมันต์อยู่เปลือก','vb','น.423'],
+ ['ปัจฉิมวัย ห้ามรสขม ร้อน เค็ม ฝาด','vw','น.240'],['หวานซึมไปไส้ใหญ่ เปรี้ยวซึมไปไส้น้อย','vw','น.240–241'],['เตโชในตรีโทษ กินกับน้ำเย็น ดังน้ำดับไฟ','vw','น.221']];
+let sel=null;
+const sh=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+function deal(){const items=sh(G).slice(0,8);$('#gres').innerHTML='';$('#score').textContent='';
+  $('#pool').innerHTML=items.map(([t,a,p])=>`<div class="card" tabindex="0" data-a="${a}" data-p="${p}">${t}</div>`).join('');
+  $('#bins').innerHTML=TX.map(t=>`<div class="bin" data-k="${t.k}" style="background:${t.c}"><h4>${t.n}</h4></div>`).join('');
+  $$('#game .card').forEach(c=>c.onclick=e=>{e.stopPropagation();if(c.parentElement.classList.contains('bin')){$('#pool').appendChild(c);c.classList.remove('ok','bad');return}
+    $$('#game .card').forEach(x=>x.classList.remove('sel'));sel=c;c.classList.add('sel')});
+  $$('#bins .bin').forEach(b=>b.onclick=()=>{if(sel){b.appendChild(sel);sel.classList.remove('sel');sel=null}})}
+$('#chk').onclick=()=>{let ok=0,n=0,wr=[];$$('#game .card').forEach(c=>{const b=c.closest('.bin');if(!b)return;n++;const g=b.dataset.k===c.dataset.a;c.classList.toggle('ok',g);c.classList.toggle('bad',!g);if(g)ok++;else wr.push(c)});
+  const tot=$$('#game .card').length;$('#score').textContent=`ถูก ${ok} จาก ${tot}`+(n<tot?` · ยังไม่ได้วาง ${tot-n} ใบ`:'');
+  $('#gres').innerHTML=wr.map(c=>`<p class="ref">• ${c.textContent} → <b>${TX.find(t=>t.k===c.dataset.a).n}</b> ${c.dataset.p}</p>`).join('')};
+$('#again').onclick=deal;deal();
+}
+</script>
+</body>
+</html>
